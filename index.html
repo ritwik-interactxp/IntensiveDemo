@@ -1,0 +1,1615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Intensive Fiscal — Investment Banking & Advisory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,200;9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+
+<!-- Google Analytics G-1GF5NXTV27 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1GF5NXTV27"></script>
+<script>
+window.dataLayer=window.dataLayer||[];
+function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());
+gtag('config','G-1GF5NXTV27',{link_attribution:false});
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#02090f;--bg2:#040e18;--bg3:#060f1e;--bg4:#081526;
+  --blue:#1a5fa8;--B:#2a7ce0;--Bp:rgba(42,124,224,.12);
+  --green:#2aaa58;--G:#3dd470;--Gp:rgba(61,212,112,.1);
+  --w:rgba(255,255,255,1);--w6:rgba(255,255,255,.6);--w4:rgba(255,255,255,.4);
+  --w2:rgba(255,255,255,.2);--w08:rgba(255,255,255,.08);--w04:rgba(255,255,255,.04);
+  --bB:rgba(42,124,224,.25);--bG:rgba(61,212,112,.2);--ln:rgba(255,255,255,.07);
+}
+html{scroll-behavior:auto;overflow-x:hidden}
+body{background:var(--bg);color:#fff;font-family:'DM Sans',sans-serif;font-weight:300;overflow-x:hidden;cursor:none;-webkit-font-smoothing:antialiased}
+::selection{background:rgba(42,124,224,.25)}
+::-webkit-scrollbar{width:2px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:linear-gradient(var(--B),var(--G))}
+
+/* CURSOR */
+#cD,#cR{position:fixed;top:0;left:0;pointer-events:none;border-radius:50%;z-index:9999;will-change:transform}
+#cD{width:7px;height:7px;background:var(--G);transform:translate(-50%,-50%)}
+#cR{width:36px;height:36px;border:1px solid rgba(61,212,112,.4);transform:translate(-50%,-50%);mix-blend-mode:screen;transition:width .35s,height .35s,border-color .35s,background .35s}
+body.hov #cR{width:56px;height:56px;border-color:rgba(61,212,112,.9);background:rgba(61,212,112,.04)}
+body.clk #cD{transform:translate(-50%,-50%) scale(.5)}
+
+/* SCROLL PROGRESS */
+#spb{position:fixed;top:0;left:0;height:2px;width:0%;background:linear-gradient(90deg,var(--B),var(--G));z-index:2000;pointer-events:none}
+
+/* LOADER */
+#ld{position:fixed;inset:0;background:var(--bg);z-index:10000;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden}
+.ld-c span{position:absolute;width:18px;height:18px;border-color:rgba(255,255,255,.07);border-style:solid}
+.ld-c span:nth-child(1){top:26px;left:26px;border-width:1px 0 0 1px}
+.ld-c span:nth-child(2){top:26px;right:26px;border-width:1px 1px 0 0}
+.ld-c span:nth-child(3){bottom:26px;left:26px;border-width:0 0 1px 1px}
+.ld-c span:nth-child(4){bottom:26px;right:26px;border-width:0 1px 1px 0}
+.ld-logo{display:flex;align-items:center;gap:.12em;overflow:hidden;font-family:'Cormorant Garamond',serif;font-size:clamp(18px,2.8vw,40px);font-weight:300;letter-spacing:.16em}
+.ld-logo .ch{display:inline-block;transform:translateY(120%)}
+.ld-logo .b{color:var(--B)}.ld-logo .g{color:var(--G)}.ld-logo .sp{width:.3em}
+.ld-sub{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--w2);margin-top:14px;overflow:hidden}
+.ld-sub span{display:inline-block;transform:translateY(120%)}
+.ld-track{width:150px;height:1px;background:rgba(255,255,255,.05);margin-top:46px;overflow:hidden}
+.ld-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--B),var(--G));transition:none}
+.ld-pct{font-size:10px;letter-spacing:.2em;color:var(--w2);margin-top:12px;font-variant-numeric:tabular-nums}
+
+/* NAV */
+nav{position:fixed;inset:0 0 auto;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:26px 5vw;transition:transform .55s cubic-bezier(.16,1,.3,1),padding .5s,background .5s,border-color .35s;will-change:transform}
+nav.sc{background:rgba(2,9,15,.94);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);padding:14px 5vw;border-bottom:1px solid var(--ln)}
+nav.nav-hide{transform:translateY(-120%)}
+.nlogo{display:flex;align-items:center;gap:11px;text-decoration:none}
+.nmark svg{width:31px;height:31px}
+.nname .t1{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:400;letter-spacing:.05em;color:#fff;line-height:1}
+.nname .t2{font-size:8px;letter-spacing:.22em;text-transform:uppercase;color:var(--w2);margin-top:3px}
+.nlinks{display:flex;gap:36px;list-style:none}
+.nlinks a{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--w4);text-decoration:none;font-weight:400;position:relative;transition:color .3s}
+.nlinks a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--G);transition:width .4s cubic-bezier(.16,1,.3,1)}
+.nlinks a:hover{color:#fff}.nlinks a:hover::after{width:100%}
+.ncta{font-size:10px;letter-spacing:.18em;text-transform:uppercase;font-weight:500;color:#fff;text-decoration:none;border:1px solid var(--bG);padding:11px 24px;border-radius:2px;position:relative;overflow:hidden;transition:border-color .3s}
+.ncta::before{content:'';position:absolute;inset:0;background:var(--green);transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.16,1,.3,1)}
+.ncta span{position:relative;z-index:1}
+.ncta:hover{border-color:var(--G)}.ncta:hover::before{transform:scaleX(1)}
+
+/* Global morph field — hidden until Our Edge 01–04 (desktop); then stays frozen after 04 */
+#globalMorphField{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+#globalMorphField canvas{display:block;width:100%!important;height:100%!important}
+@media(min-width:901px){
+  #globalMorphField{opacity:0;pointer-events:none}
+}
+
+/* HERO — WebGL sphere centered in banner; morph sits behind entire site */
+#hero{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:0 5vw;overflow:hidden;background:transparent}
+#sphCv{position:absolute;left:50%;top:50%;right:auto;transform:translate(-28%,-50%);width:min(74vmin,700px);height:min(74vmin,700px);max-width:none;pointer-events:none;z-index:1;opacity:.95}
+#sphCv canvas{display:block;width:100%!important;height:100%!important;object-fit:contain}
+@media(max-width:900px){
+  #sphCv{transform:translate(-50%,-46%);width:min(92vmin,440px);height:min(92vmin,440px);opacity:.9}
+}
+
+/* Focus band — particle field + mask (similar to WQF #focus-industries layer) */
+#focusBand{position:relative;z-index:1;min-height:56vh;background:rgba(4,14,24,.9);border-top:1px solid var(--ln);border-bottom:1px solid var(--ln);overflow:hidden}
+#focusCv{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.75;mask-image:linear-gradient(180deg,transparent 0%,#000 14%,#000 86%,transparent 100%);-webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 14%,#000 86%,transparent 100%)}
+.focus-inner{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;min-height:52vh;padding:72px 5vw;text-align:center}
+.focus-inner p{max-width:560px;font-family:'Cormorant Garamond',serif;font-size:clamp(22px,3.2vw,38px);font-weight:300;line-height:1.35;color:rgba(255,255,255,.45)}
+.focus-inner em{color:var(--G);font-style:italic}
+.hfade{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,var(--bg) 26%,rgba(2,9,15,.72) 52%,transparent 78%)}
+.hfade-b{position:absolute;bottom:0;left:0;right:0;height:180px;background:linear-gradient(transparent,var(--bg));z-index:1;pointer-events:none}
+.hc{position:relative;z-index:2;max-width:680px}
+.hkick{display:flex;align-items:center;gap:14px;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--G);font-weight:400;margin-bottom:30px;opacity:0}
+.hkick::before{content:'';width:32px;height:1px;background:var(--G);flex-shrink:0}
+.htitle{font-family:'Cormorant Garamond',serif;font-size:clamp(52px,8vw,106px);line-height:.91;font-weight:300;letter-spacing:-.02em}
+.hl{overflow:hidden;display:block}
+.hw{display:inline-block;transform:translateY(108%)}
+.hem{color:var(--G);font-style:italic}.hbl{color:var(--B)}
+.hsub{font-size:15px;line-height:1.82;color:var(--w4);max-width:430px;margin-top:36px;opacity:0}
+.hbtns{display:flex;align-items:center;gap:28px;margin-top:48px;opacity:0}
+.btnP{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--blue),var(--B));color:#fff;padding:15px 38px;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:500;border:none;border-radius:2px;text-decoration:none;cursor:none;transition:transform .3s,box-shadow .3s}
+.btnP:hover{transform:translateY(-3px);box-shadow:0 18px 46px rgba(26,95,168,.44)}
+.btnP svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0}
+.btnS{display:flex;align-items:center;gap:11px;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--w4);text-decoration:none;font-weight:400;transition:color .3s;cursor:none}
+.btnS:hover{color:#fff}
+.bsRing{width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;transition:all .4s cubic-bezier(.16,1,.3,1)}
+.btnS:hover .bsRing{border-color:#fff;background:rgba(255,255,255,.05);transform:rotate(45deg)}
+.bsRing svg{width:10px;height:10px;stroke:currentColor;fill:none;stroke-width:2}
+.hscrl{position:absolute;bottom:38px;left:5vw;z-index:2;display:flex;align-items:center;gap:12px;opacity:0}
+.hsl{width:1px;height:50px;background:var(--ln);position:relative;overflow:hidden}
+.hsl::after{content:'';position:absolute;width:100%;height:45%;background:linear-gradient(transparent,var(--G),transparent);animation:sldrop 2.6s ease infinite}
+@keyframes sldrop{0%{top:-50%}100%{top:150%}}
+.hslbl{font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:var(--w2);writing-mode:vertical-rl}
+.hfloats{position:absolute;right:5vw;top:50%;transform:translateY(-50%);z-index:3;display:flex;flex-direction:column;gap:30px;opacity:0}
+.hf{text-align:right}
+.hfn{font-family:'Cormorant Garamond',serif;font-size:50px;font-weight:300;line-height:1}
+.hfu{font-size:24px;vertical-align:super}
+.hfu.b{color:var(--B)}.hfu.g{color:var(--G)}
+.hfl{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--w2);margin-top:5px}
+.hfdiv{height:1px;background:var(--ln);margin-top:30px}
+
+/* MARQUEE */
+.mqw{position:relative;z-index:1;overflow:hidden;border-top:1px solid var(--ln);border-bottom:1px solid var(--ln);background:rgba(4,14,24,.9);padding:16px 0}
+.mqt{display:flex;width:max-content;animation:mqa 36s linear infinite}
+.mqt.rev{animation-direction:reverse}
+@keyframes mqa{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.mqi{white-space:nowrap;padding:0 46px;font-size:9.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--w2);display:flex;align-items:center;gap:46px}
+.mqd{width:3px;height:3px;border-radius:50%;flex-shrink:0}
+.mqd.b{background:var(--B);opacity:.5}.mqd.g{background:var(--G);opacity:.5}
+
+/* STATS STRIP — starts clipped for horizontal reveal */
+.sstrip{position:relative;z-index:1;display:grid;grid-template-columns:repeat(4,1fr);background:var(--ln);gap:1px;border-top:1px solid var(--ln);border-bottom:1px solid var(--ln);clip-path:inset(0 100% 0 0)}
+.sbox{background:rgba(4,14,24,.92);padding:50px 38px;position:relative;overflow:hidden;transition:background .4s}
+.sbox:hover{background:var(--bg3)}
+.sbox::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;transition:width .6s cubic-bezier(.16,1,.3,1)}
+.sbox:nth-child(odd)::after{background:linear-gradient(90deg,var(--blue),var(--B))}
+.sbox:nth-child(even)::after{background:linear-gradient(90deg,var(--green),var(--G))}
+.sbox:hover::after{width:100%}
+.si{font-size:9px;letter-spacing:.22em;color:var(--w2);margin-bottom:20px}
+.sn{font-family:'Cormorant Garamond',serif;font-size:clamp(44px,4vw,70px);font-weight:300;line-height:1}
+.su{font-size:.56em;vertical-align:super}
+.su.b{color:var(--B)}.su.g{color:var(--G)}
+.sl{font-size:12px;color:var(--w4);margin-top:10px;line-height:1.6}
+.sglow{position:absolute;width:100px;height:100px;border-radius:50%;top:-30px;right:-30px;filter:blur(50px);opacity:.08;pointer-events:none}
+
+/* HORIZONTAL PIN */
+#hpW{position:relative;z-index:1}
+#hpT{display:flex}
+.hpan{flex-shrink:0;width:100vw;height:100vh;display:flex;align-items:center;overflow:hidden;position:relative}
+.p1{background:rgba(2,9,15,.94)}.p2{background:rgba(10,37,64,.94)}.p3{background:rgba(10,32,22,.94)}.p4{background:rgba(18,16,58,.94)}
+.hpi{padding:0 10vw;max-width:820px;position:relative;z-index:2;opacity:1;transform:translateY(0)}
+.hpo{font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--w2);margin-bottom:22px}
+.hph{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,4.8vw,62px);font-weight:300;line-height:1.12;margin-bottom:24px}
+.hph em{font-style:italic}
+.p1 .hph em{color:var(--G)}.p2 .hph em{color:#3dd4d4}.p3 .hph em{color:var(--G)}.p4 .hph em{color:#a78bfa}
+.hpb{font-size:14px;line-height:1.85;color:var(--w4);max-width:380px}
+.hptag{display:inline-flex;align-items:center;gap:10px;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;margin-top:36px;padding-top:22px;border-top:1px solid rgba(255,255,255,.08)}
+.p1 .hptag,.p3 .hptag{color:var(--G)}.p2 .hptag{color:#3dd4d4}.p4 .hptag{color:#a78bfa}
+.hptag svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:1.8}
+.hpbgn{position:absolute;right:6vw;top:50%;transform:translateY(-50%);font-family:'Cormorant Garamond',serif;font-size:36vw;font-weight:300;line-height:1;opacity:.022;pointer-events:none;user-select:none;color:#fff}
+.hpprog{position:absolute;bottom:0;left:0;height:2px;width:0%}
+.p1 .hpprog{background:linear-gradient(90deg,var(--blue),var(--B))}
+.p2 .hpprog{background:linear-gradient(90deg,#1a7cc7,#3dd4d4)}
+.p3 .hpprog{background:linear-gradient(90deg,var(--green),var(--G))}
+.p4 .hpprog{background:linear-gradient(90deg,#4a4ae8,#a78bfa)}
+.hpdots{position:fixed;bottom:36px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:100;opacity:0;pointer-events:none;transition:opacity .3s}
+.hpdot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.2);transition:background .3s,transform .3s}
+.hpdot.on{background:#fff;transform:scale(1.4)}
+
+/* MANIFESTO */
+#mf{position:relative;z-index:1;background:rgba(6,15,30,.92);padding:160px 5vw;overflow:hidden}
+#mfCv{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:.65;mask-image:radial-gradient(ellipse 85% 70% at 50% 45%,#000 20%,transparent 72%);-webkit-mask-image:radial-gradient(ellipse 85% 70% at 50% 45%,#000 20%,transparent 72%)}
+.mfbg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(42,124,224,.08) 0%,transparent 70%);pointer-events:none;z-index:1}
+.mf-top{position:relative;z-index:2}
+.mflbl{font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--w2);text-align:center;margin-bottom:52px}
+#mftxt{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,3.8vw,54px);font-weight:300;line-height:1.38;max-width:960px;margin:0 auto;text-align:center;letter-spacing:-.01em}
+.mword{display:inline-block;color:rgba(255,255,255,.11)}
+.mword.em{color:rgba(61,212,112,.15);font-style:italic}
+.mword.bl{color:rgba(42,124,224,.15)}
+
+/* CARD ROW */
+#crds{position:relative;z-index:1;background:rgba(2,9,15,.92);padding:120px 0;overflow:hidden}
+#crdsCv{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:.5}
+.crds-hd{padding:0 5vw;margin-bottom:70px;display:grid;grid-template-columns:1fr 1fr;align-items:end;gap:40px;position:relative;z-index:1}
+.crds-row{display:flex;padding:0 5vw;gap:24px;overflow:visible;position:relative;z-index:1}
+.crd{flex:0 0 400px;border-radius:6px;padding:52px 46px;position:relative;overflow:hidden;min-height:340px;display:flex;flex-direction:column;justify-content:space-between;transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.crd:hover{transform:translateY(-8px)}
+.crd1{background:linear-gradient(145deg,#104568,#0a2d44)}
+.crd2{background:linear-gradient(145deg,#a33910,#7a2908)}
+.crd3{background:linear-gradient(145deg,#1a5e30,#104520)}
+.crd4{background:linear-gradient(145deg,#1a2e8a,#111f68)}
+.cshne{position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.07) 0%,transparent 55%);pointer-events:none}
+.cico{width:52px;height:52px;border-radius:4px;border:1px solid rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;margin-bottom:26px}
+.cico svg{width:22px;height:22px;stroke:rgba(255,255,255,.7);fill:none;stroke-width:1.2}
+.ctit{font-family:'DM Sans',sans-serif;font-size:clamp(15px,1.6vw,20px);font-weight:400;text-transform:uppercase;letter-spacing:.02em;line-height:1.2;max-width:240px;margin-bottom:13px}
+.cbod{font-size:13px;line-height:1.72;opacity:.48;max-width:300px}
+.cft{font-size:9.5px;letter-spacing:.16em;opacity:.35;margin-top:auto;padding-top:22px;border-top:1px solid rgba(255,255,255,.1)}
+.cbg{position:absolute;bottom:-20px;right:-6px;font-family:'Cormorant Garamond',serif;font-size:140px;font-weight:300;opacity:.05;line-height:1;pointer-events:none;user-select:none}
+.crdcv{position:absolute;top:0;right:0;width:55%;height:100%;pointer-events:none;opacity:.2}
+
+/* SERVICES */
+#svc{position:relative;z-index:1;background:rgba(4,14,24,.9);padding:120px 5vw;overflow:hidden}
+#svcCv{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:.45}
+.svcl{display:grid;grid-template-columns:1fr 1.5fr;gap:80px;align-items:start;position:relative;z-index:1}
+.svlist{margin-top:52px}
+.svrow{border-top:1px solid var(--ln);padding:24px 0;display:grid;grid-template-columns:36px 1fr 28px;align-items:center;gap:16px;cursor:none;transition:border-color .35s}
+.svrow:last-child{border-bottom:1px solid var(--ln)}
+.svrow:hover,.svrow.on{border-color:rgba(42,124,224,.35)}
+.svnum{font-size:9.5px;color:var(--B);letter-spacing:.1em}
+.svname{font-size:15.5px;font-weight:300;letter-spacing:.02em;transition:color .3s}
+.svrow.on .svname{color:var(--G)}
+.svdd{display:none;grid-column:2;font-size:12px;line-height:1.72;color:var(--w4);padding-top:8px;max-width:340px}
+.svrow.on .svdd{display:block}
+.svarr{width:28px;height:28px;border-radius:50%;border:1px solid var(--ln);display:flex;align-items:center;justify-content:center;transition:all .35s cubic-bezier(.16,1,.3,1)}
+.svarr svg{width:10px;height:10px;stroke:var(--B);fill:none;stroke-width:2}
+.svrow:hover .svarr,.svrow.on .svarr{border-color:var(--B);background:var(--Bp);transform:rotate(45deg)}
+.svvis{position:sticky;top:120px;background:var(--bg3);border:1px solid var(--ln);border-radius:4px;overflow:hidden;aspect-ratio:3/4;display:flex;flex-direction:column;justify-content:flex-end;padding:38px;transition:border-color .4s}
+.svvis:hover{border-color:rgba(42,124,224,.2)}
+.svglow{position:absolute;inset:0;background:radial-gradient(ellipse 65% 55% at 60% 25%,rgba(42,124,224,.1) 0%,transparent 70%);pointer-events:none}
+.svbnum{position:absolute;top:-28px;right:-10px;font-family:'Cormorant Garamond',serif;font-size:190px;font-weight:300;opacity:.03;line-height:1;pointer-events:none}
+.svico{position:absolute;top:34px;left:34px;width:58px;height:58px;border-radius:50%;border:1px solid var(--bB);display:flex;align-items:center;justify-content:center}
+.svico svg{width:26px;height:26px;stroke:var(--B);fill:none;stroke-width:1}
+.svtag{font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:var(--G);margin-bottom:12px}
+.svtit{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2vw,32px);font-weight:300;line-height:1.2}
+.svbod{font-size:12px;color:var(--w4);line-height:1.68;margin-top:11px;max-width:280px}
+#svcv{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.15}
+
+/* APPROACH */
+#ap{position:relative;z-index:1;background:rgba(2,9,15,.92);padding:120px 5vw;overflow:hidden}
+#apCv{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:.4}
+.aph{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;margin-bottom:64px;position:relative;z-index:1}
+.apg{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--ln);position:relative;z-index:1}
+.apc{background:var(--bg);padding:46px 34px;position:relative;overflow:hidden;cursor:none;transition:background .4s}
+.apc:hover{background:var(--bg3)}
+.apbig{font-family:'Cormorant Garamond',serif;font-size:96px;font-weight:300;color:rgba(255,255,255,.022);line-height:1;margin-bottom:-24px}
+.apico{width:44px;height:44px;border:1px solid var(--bB);border-radius:3px;display:flex;align-items:center;justify-content:center;margin-bottom:22px;position:relative;z-index:1;transition:all .4s cubic-bezier(.16,1,.3,1)}
+.apc:hover .apico{border-color:var(--G);background:var(--Gp);transform:scale(1.05)}
+.apico svg{width:19px;height:19px;stroke:var(--B);fill:none;stroke-width:1.3;transition:stroke .3s}
+.apc:hover .apico svg{stroke:var(--G)}
+.aptit{font-size:16.5px;font-weight:300;margin-bottom:12px;position:relative;z-index:1;transition:color .3s}
+.apc:hover .aptit{color:var(--G)}
+.apbod{font-size:12.5px;line-height:1.76;color:var(--w4);position:relative;z-index:1}
+.apln{position:absolute;bottom:0;left:0;width:0;height:1px;background:linear-gradient(90deg,var(--G),transparent);transition:width .5s cubic-bezier(.16,1,.3,1)}
+.apc:hover .apln{width:100%}
+
+/* TESTIMONIALS — intense cyberpunk hyperspeed (neon tunnel; reactbits Cyberpunk preset vibe) */
+#ti{position:relative;z-index:1;background:#030108;padding:120px 5vw;overflow:hidden}
+#tiHyperspeedLayer{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0}
+#tiHyperspeedCv{display:block;width:100%!important;height:100%!important}
+.tiw{max-width:800px;margin:56px auto 0;position:relative;z-index:2}
+.tiqm{font-family:'Cormorant Garamond',serif;font-size:150px;line-height:1;color:rgba(42,124,224,.06);position:absolute;top:-38px;left:-24px;pointer-events:none;user-select:none}
+#ti .slbl,#ti .stit,#ti .tiq,#ti .tia,#ti .tids{text-shadow:0 0 32px rgba(0,0,0,.95),0 2px 20px rgba(0,0,0,.9)}
+.tiq{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2.6vw,34px);font-weight:300;line-height:1.5;text-align:center}
+.tihl{color:var(--G);font-style:italic}
+.tia{text-align:center;margin-top:34px;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--w2)}
+.tia strong{display:block;color:rgba(255,255,255,.6);margin-bottom:4px;font-weight:400}
+.tids{display:flex;gap:9px;justify-content:center;margin-top:38px}
+.tidd{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.14);cursor:none;transition:all .3s}
+.tidd.on{background:var(--B);transform:scale(1.5)}
+
+/* SECTORS */
+#sec{position:relative;z-index:1;background:rgba(6,15,30,.93);padding:100px 5vw}
+.sech{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;margin-bottom:50px}
+.secg{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.secp{border:1px solid var(--ln);border-radius:3px;padding:20px 18px;display:flex;align-items:center;gap:12px;cursor:none;transition:all .35s cubic-bezier(.16,1,.3,1);position:relative;overflow:hidden}
+.secp::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(42,124,224,.06),transparent);opacity:0;transition:opacity .3s}
+.secp:hover{border-color:var(--bB);transform:translateY(-3px);box-shadow:0 10px 28px rgba(0,0,0,.3)}.secp:hover::before{opacity:1}
+.secd{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.secd.b{background:var(--B);opacity:.55}.secd.g{background:var(--G);opacity:.55}
+.secn{font-size:12.5px;font-weight:300;letter-spacing:.02em}
+
+/* CTA — soft blue/green hyperspeed (subtle warp behind “Ready to Transform”) */
+#cta{position:relative;z-index:1;background:rgba(2,9,15,.88);padding:140px 5vw;text-align:center;overflow:hidden}
+#ctaHyperspeedLayer{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0}
+#ctaHyperspeedCv{display:block;width:100%!important;height:100%!important}
+#ctaCv{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;opacity:.42}
+.ctag1{position:absolute;inset:0;background:radial-gradient(ellipse 50% 70% at 50% 50%,rgba(26,95,168,.1) 0%,transparent 65%);pointer-events:none;z-index:2}
+.ctag2{position:absolute;inset:0;background:radial-gradient(ellipse 28% 45% at 50% 85%,rgba(42,170,88,.08) 0%,transparent 70%);pointer-events:none;z-index:2}
+.ctaring{position:absolute;border-radius:50%;border:1px solid rgba(42,124,224,.06);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:3}
+.cr1{width:500px;height:500px;animation:rp 6s ease infinite}
+.cr2{width:720px;height:720px;animation:rp 6s ease 2s infinite}
+.cr3{width:940px;height:940px;animation:rp 6s ease 4s infinite;border-color:rgba(42,124,224,.03)}
+@keyframes rp{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.6}50%{transform:translate(-50%,-50%) scale(1.05);opacity:1}}
+.ctaey{font-size:9.5px;letter-spacing:.32em;text-transform:uppercase;color:var(--G);margin-bottom:24px;position:relative;z-index:4}
+.ctat{font-family:'Cormorant Garamond',serif;font-size:clamp(40px,5.8vw,80px);font-weight:300;line-height:1.04;max-width:700px;margin:0 auto;position:relative;z-index:4}
+.ctat em{font-style:italic;color:var(--G)}.ctat .bl{color:var(--B)}
+.ctas{font-size:14px;color:var(--w4);margin:22px auto 0;max-width:400px;line-height:1.76;position:relative;z-index:4}
+.ctabs{display:flex;gap:16px;justify-content:center;margin-top:52px;flex-wrap:wrap;position:relative;z-index:4}
+.btnCp{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--blue),var(--B));color:#fff;padding:17px 44px;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:500;border:none;border-radius:2px;text-decoration:none;cursor:none;transition:transform .3s,box-shadow .3s}
+.btnCp:hover{transform:translateY(-3px);box-shadow:0 20px 52px rgba(26,95,168,.42)}
+.btnCp svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2}
+.btnCs{display:inline-flex;align-items:center;gap:10px;background:transparent;color:#fff;padding:17px 44px;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:400;border:1px solid var(--w08);border-radius:2px;text-decoration:none;cursor:none;transition:all .35s}
+.btnCs:hover{border-color:var(--w2);background:var(--w04)}
+.btnCs svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2}
+
+/* FOOTER */
+footer{position:relative;z-index:1;background:rgba(4,14,24,.94);border-top:1px solid var(--ln);padding:70px 5vw 36px;overflow:hidden}
+#ftCv{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:.35}
+.ftg{display:grid;grid-template-columns:1.7fr 1fr 1fr 1fr;gap:56px;margin-bottom:56px;position:relative;z-index:1}
+.ft-brand{position:relative;display:inline-block;margin-bottom:14px}
+.ft-orb{position:absolute;left:40%;top:50%;width:min(200px,42vw);height:min(200px,42vw);transform:translate(-50%,-50%);background:radial-gradient(circle at 40% 40%,rgba(0,245,255,.35),rgba(168,85,247,.22),rgba(255,45,150,.12) 45%,transparent 68%);filter:blur(32px);opacity:.85;animation:ftOrbDrift 7s ease-in-out infinite;pointer-events:none;z-index:0}
+@keyframes ftOrbDrift{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.7}50%{transform:translate(-45%,-55%) scale(1.2);opacity:1}}
+.ftbn{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;letter-spacing:.06em;position:relative;z-index:1}
+.ftbn .b{color:var(--B)}.ftbn .g{color:var(--G)}
+.ftbn-anim{animation:ftLogoGlitch 5.5s steps(1,end) infinite}
+@keyframes ftLogoGlitch{0%,88%,100%{transform:none;text-shadow:none;filter:none}89%{transform:translate(-2px,1px);text-shadow:3px 0 rgba(255,61,172,.9),-3px 0 rgba(0,234,255,.75)}90%{transform:translate(2px,-1px);text-shadow:-3px 0 rgba(255,61,172,.85),3px 0 rgba(0,234,255,.8)}91%{transform:translate(-1px,0);text-shadow:2px 0 rgba(168,85,247,.7),-2px 0 rgba(0,234,255,.6)}92%{transform:none;text-shadow:none;filter:none}}
+@media(prefers-reduced-motion:reduce){.ft-orb,.ftbn-anim{animation:none!important}.ft-orb{opacity:.5}}
+.ftbp{font-size:12.5px;line-height:1.78;color:var(--w2);max-width:250px}
+.ftc h4{font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:var(--w2);margin-bottom:20px;font-weight:400}
+.ftc ul{list-style:none;display:flex;flex-direction:column;gap:11px}
+.ftc a{font-size:13px;font-weight:300;color:var(--w4);text-decoration:none;transition:color .3s}
+.ftc a:hover{color:#fff}
+.ftbot{border-top:1px solid var(--ln);padding-top:26px;display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1}
+.ftcp,.ftsebi{font-size:11px;color:var(--w2)}
+.ftsebi span{color:var(--B)}
+
+/* SECTION HELPERS */
+.slbl{font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--G);margin-bottom:18px;display:flex;align-items:center;gap:12px}
+.slbl::before{content:'';width:28px;height:1px;background:var(--G);flex-shrink:0}
+.stit{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,66px);font-weight:300;line-height:1.05;letter-spacing:-.01em}
+.stit em{font-style:italic;color:var(--G)}.stit .bl{color:var(--B)}
+.ssub{font-size:14px;line-height:1.82;color:var(--w4);max-width:460px;margin-top:16px}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .nlinks,.ncta{display:none}
+  .hfloats{display:none}
+  .sstrip{grid-template-columns:repeat(2,1fr)}
+  .svcl{grid-template-columns:1fr}.svvis{display:none}
+  .aph{grid-template-columns:1fr}.apg{grid-template-columns:1fr}
+  .sech{grid-template-columns:1fr}.secg{grid-template-columns:repeat(2,1fr)}
+  .ftg{grid-template-columns:1fr 1fr}
+  .crds-hd{grid-template-columns:1fr}
+  #hpW{display:none}
+}
+</style>
+</head>
+<body>
+
+<div id="spb"></div>
+<div id="cD"></div>
+<div id="cR"></div>
+
+<!-- LOADER -->
+<div id="ld">
+  <div class="ld-c"><span></span><span></span><span></span><span></span></div>
+  <div class="ld-logo">
+    <span class="ch b">I</span><span class="ch b">N</span><span class="ch b">T</span><span class="ch b">E</span><span class="ch b">N</span><span class="ch b">S</span><span class="ch b">I</span><span class="ch b">V</span><span class="ch b">E</span>
+    <span class="ch sp"></span>
+    <span class="ch g">F</span><span class="ch g">I</span><span class="ch g">S</span><span class="ch g">C</span><span class="ch g">A</span><span class="ch g">L</span>
+  </div>
+  <div class="ld-sub"><span>SEBI Category-I Merchant Banker · Est. 1997</span></div>
+  <div class="ld-track"><div class="ld-fill" id="ldF"></div></div>
+  <div class="ld-pct" id="ldP">0%</div>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="nlogo" href="#">
+    <div class="nmark">
+      <svg viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="15" stroke="#2a7ce0" stroke-width="1"/>
+        <circle cx="16" cy="16" r="9" stroke="#3dd470" stroke-width="1" stroke-dasharray="2.5 3"/>
+        <circle cx="16" cy="16" r="3.5" fill="#2a7ce0" opacity=".85"/>
+        <circle cx="16" cy="7" r="1.2" fill="#3dd470" opacity=".7"/>
+        <circle cx="25" cy="16" r="1" fill="#2a7ce0" opacity=".4"/>
+      </svg>
+    </div>
+    <div class="nname">
+      <div class="t1">Intensive <span style="color:var(--B)">Fiscal</span></div>
+      <div class="t2">Investment Banking & Advisory</div>
+    </div>
+  </a>
+  <ul class="nlinks">
+    <li><a href="#svc">Services</a></li>
+    <li><a href="#ap">Approach</a></li>
+    <li><a href="#sec">Sectors</a></li>
+    <li><a href="#ti">Clients</a></li>
+  </ul>
+  <a class="ncta" href="#cta"><span>Book Consultation</span></a>
+</nav>
+
+<div id="globalMorphField" aria-hidden="true"></div>
+
+<!-- HERO -->
+<section id="hero">
+  <div id="sphCv" aria-hidden="true"></div>
+  <div class="hfade"></div>
+  <div class="hfade-b"></div>
+  <div class="hc">
+    <div class="hkick" id="hkick">SEBI Category-I Merchant Banker · Est. 1997</div>
+    <h1 class="htitle">
+      <span class="hl"><span class="hw">Capital That</span></span>
+      <span class="hl"><span class="hw hem">Moves</span>&thinsp;<span class="hw">Markets</span></span>
+      <span class="hl"><span class="hw hbl">Forward.</span></span>
+    </h1>
+    <p class="hsub" id="hsub">India's most trusted investment banking partner. From landmark IPOs to complex debt structures, we architect capital strategies that transform ambitious businesses.</p>
+    <div class="hbtns" id="hbtns">
+      <a class="btnP" href="#cta">Book Consultation <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <a class="btnS" href="#svc"><div class="bsRing"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>Our Services</a>
+    </div>
+  </div>
+  <div class="hscrl" id="hscrl"><div class="hsl"></div><div class="hslbl">Scroll</div></div>
+  <div class="hfloats" id="hfloats">
+    <div class="hf"><div class="hfn"><span class="counter" data-t="300">0</span><span class="hfu b">+</span></div><div class="hfl">Corporate Groups</div></div>
+    <div class="hfdiv"></div>
+    <div class="hf"><div class="hfn"><span class="counter" data-t="27">0</span><span class="hfu g">yr</span></div><div class="hfl">Track Record</div></div>
+    <div class="hfdiv"></div>
+    <div class="hf"><div class="hfn"><span class="counter" data-t="100">0</span><span class="hfu g">%</span></div><div class="hfl">Client Retention</div></div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="mqw"><div class="mqt" id="mqt">
+  <div class="mqi">IPO Advisory <span class="mqd b"></span> Private Equity <span class="mqd g"></span> Debt Syndication <span class="mqd b"></span> Open Offer / Takeover <span class="mqd g"></span> ESOP Valuation <span class="mqd b"></span> Merchant Banking <span class="mqd g"></span> Project Finance <span class="mqd b"></span> Acquisition Finance <span class="mqd g"></span> Structured Finance <span class="mqd b"></span> Rights Issue <span class="mqd g"></span></div>
+  <div class="mqi" aria-hidden="true">IPO Advisory <span class="mqd b"></span> Private Equity <span class="mqd g"></span> Debt Syndication <span class="mqd b"></span> Open Offer / Takeover <span class="mqd g"></span> ESOP Valuation <span class="mqd b"></span> Merchant Banking <span class="mqd g"></span> Project Finance <span class="mqd b"></span> Acquisition Finance <span class="mqd g"></span> Structured Finance <span class="mqd b"></span> Rights Issue <span class="mqd g"></span></div>
+</div></div>
+
+<!-- STATS -->
+<div class="sstrip">
+  <div class="sbox"><div class="sglow" style="background:#2a7ce0"></div><div class="si">01</div><div class="sn"><span class="cnt" data-t="300">0</span><span class="su b">+</span></div><div class="sl">Corporate groups served across industries</div></div>
+  <div class="sbox"><div class="sglow" style="background:#3dd470"></div><div class="si">02</div><div class="sn"><span class="cnt" data-t="27">0</span><span class="su g">yr</span></div><div class="sl">Years of market expertise & relationships</div></div>
+  <div class="sbox"><div class="sglow" style="background:#2a7ce0"></div><div class="si">03</div><div class="sn"><span class="cnt" data-t="100">0</span><span class="su g">%</span></div><div class="sl">Client retention over two decades</div></div>
+  <div class="sbox"><div class="sglow" style="background:#3dd470"></div><div class="si">04</div><div class="sn"><span class="cnt" data-t="50">0</span><span class="su b">+</span></div><div class="sl">Cities with active pan-India presence</div></div>
+</div>
+
+<!-- Particle field strip (WQF-style ambient canvas) -->
+<div id="focusBand">
+  <canvas id="focusCv"></canvas>
+  <div class="focus-inner">
+    <p>We operate where <em>regulation</em>, <em>capital</em>, and <em>execution</em> intersect — the layer where transactions succeed or fail.</p>
+  </div>
+</div>
+
+<!-- HORIZONTAL PIN -->
+<div id="hpW">
+  <div id="hpT">
+    <div class="hpan p1"><div class="hpbgn">01</div><div class="hpi"><div class="hpo">Our Edge — 01 / 04</div><h2 class="hph">Regulatory Depth<br>That Others <em>Can't Match</em></h2><p class="hpb">As SEBI Category-I Merchant Bankers since 1997, we've navigated every regulatory cycle India has produced. Our compliance intelligence is unmatched — giving clients decisive advantage.</p><div class="hptag"><svg viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>27 Years of SEBI-Registered Expertise</div></div><div class="hpprog"></div></div>
+    <div class="hpan p2"><div class="hpbgn">02</div><div class="hpi"><div class="hpo">Our Edge — 02 / 04</div><h2 class="hph">Pan-India Network,<br><em>Global Capital</em> Access</h2><p class="hpb">Relationships across 50+ cities and direct access to international PE funds, HNIs, family offices, and institutional investors. We connect India's growth stories to the capital that will power them.</p><div class="hptag"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15 15 0 010 20M12 2a15 15 0 000 20"/></svg>300+ Corporate Relationships</div></div><div class="hpprog"></div></div>
+    <div class="hpan p3"><div class="hpbgn">03</div><div class="hpi"><div class="hpo">Our Edge — 03 / 04</div><h2 class="hph">Sector Intelligence<br>Across <em>Every Vertical</em></h2><p class="hpb">Deep domain expertise across Real Estate, Healthcare, Jewellery, IT, Agri and more. We don't generalize — we bring specialized insight to each transaction, driving superior outcomes.</p><div class="hptag"><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3zM3 9h18M9 21V9"/></svg>12+ Industry Sectors Covered</div></div><div class="hpprog"></div></div>
+    <div class="hpan p4"><div class="hpbgn">04</div><div class="hpi"><div class="hpo">Our Edge — 04 / 04</div><h2 class="hph">End-to-End<br><em>Transaction</em> Excellence</h2><p class="hpb">From mandate to close — documentation, due diligence, investor relations, regulatory filings. We manage the full lifecycle so you focus on your business while we drive the deal.</p><div class="hptag"><svg viewBox="0 0 24 24"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg>100% Client Retention Rate</div></div><div class="hpprog"></div></div>
+  </div>
+  <div class="hpdots" id="hpdots"><div class="hpdot on"></div><div class="hpdot"></div><div class="hpdot"></div><div class="hpdot"></div></div>
+</div>
+
+<!-- MANIFESTO -->
+<div id="mf">
+  <canvas id="mfCv" aria-hidden="true"></canvas>
+  <div class="mfbg"></div>
+  <div class="mf-top">
+    <div class="mflbl">Our Belief</div>
+    <p id="mftxt"></p>
+  </div>
+</div>
+
+<!-- CARDS -->
+<div id="crds">
+  <canvas id="crdsCv" aria-hidden="true"></canvas>
+  <div class="crds-hd">
+    <div><div class="slbl">Practice Areas</div><h2 class="stit">What We <em>Do</em></h2></div>
+    <p class="ssub">Four foundational pillars powering India's most consequential capital market transactions — executed with precision every time.</p>
+  </div>
+  <div class="crds-row" id="crdsRow">
+    <div class="crd crd1"><canvas class="crdcv" data-t="wave"></canvas><div class="cshne"></div><div><div class="cico"><svg viewBox="0 0 24 24"><polyline points="22,7 13,16 8,11 2,17"/><polyline points="16,7 22,7 22,13"/></svg></div><div class="ctit">Initial Public Offerings</div><div class="cbod">Full-spectrum IPO management from DRHP preparation and SEBI filings to investor roadshows and post-listing support. Trusted by Bikaji Foods and many marquee listings.</div></div><div class="cft">01 — PUBLIC MARKETS</div><div class="cbg">IPO</div></div>
+    <div class="crd crd2"><canvas class="crdcv" data-t="dots"></canvas><div class="cshne"></div><div><div class="cico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg></div><div class="ctit">Private Equity Syndication</div><div class="cbod">Connecting growth-stage and mature businesses with the right PE funds, family offices, and HNI investors. Deal architecture that maximizes value for all stakeholders.</div></div><div class="cft">02 — PRIVATE CAPITAL</div><div class="cbg">PE</div></div>
+    <div class="crd crd3"><canvas class="crdcv" data-t="grid"></canvas><div class="cshne"></div><div><div class="cico"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></div><div class="ctit">Debt Syndication</div><div class="cbod">Structured finance, project finance, mezzanine, and acquisition financing. We engineer debt solutions that preserve equity while enabling ambitious expansion strategies.</div></div><div class="cft">03 — DEBT MARKETS</div><div class="cbg">DEBT</div></div>
+    <div class="crd crd4"><canvas class="crdcv" data-t="rings"></canvas><div class="cshne"></div><div><div class="cico"><svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></div><div class="ctit">Open Offer &amp; Takeovers</div><div class="cbod">Expert management of open offers, takeovers, and substantial acquisitions under SEBI SAST Regulations. Regulatory precision combined with strategic counsel at every step.</div></div><div class="cft">04 — M&amp;A / REGULATORY</div><div class="cbg">M&amp;A</div></div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="svc">
+  <canvas id="svcCv" aria-hidden="true"></canvas>
+  <div class="svcl">
+    <div>
+      <div class="slbl">All Services</div>
+      <h2 class="stit">Full-Spectrum<br><em>Advisory</em></h2>
+      <div class="svlist">
+        <div class="svrow on" data-title="IPO & SME IPO Management" data-desc="End-to-end management of Main Board and SME IPOs including DRHP preparation, SEBI correspondence, investor roadshows, and post-listing compliance." data-n="01"><div class="svnum">01</div><div><div class="svname">IPO & SME IPO</div><div class="svdd">End-to-end management including DRHP, SEBI filings, roadshows, and post-listing compliance.</div></div><div class="svarr"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div>
+        <div class="svrow" data-title="Private Equity Syndication" data-desc="Strategic PE syndication connecting growth businesses with the right fund partners. Structured to maximize valuation and preserve founder intent." data-n="02"><div class="svnum">02</div><div><div class="svname">Private Equity</div><div class="svdd">Strategic syndication connecting businesses with the right PE fund partners.</div></div><div class="svarr"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div>
+        <div class="svrow" data-title="Debt Syndication & Structured Finance" data-desc="Comprehensive debt solutions including project finance, acquisition financing, mezzanine, and structured instruments engineered to enable growth." data-n="03"><div class="svnum">03</div><div><div class="svname">Debt Syndication</div><div class="svdd">Project finance, acquisition finance, mezzanine and structured instruments.</div></div><div class="svarr"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div>
+        <div class="svrow" data-title="Open Offer / Takeover Advisory" data-desc="Expert guidance through SEBI SAST Regulations for open offers and substantial acquisitions. Full regulatory management from trigger event to completion." data-n="04"><div class="svnum">04</div><div><div class="svname">Open Offer / Takeover</div><div class="svdd">Full SEBI SAST management from trigger event to completion.</div></div><div class="svarr"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div>
+        <div class="svrow" data-title="ESOP & Valuation Services" data-desc="SEBI-recognized merchant banker valuation certificates for ESOPs, regulatory compliance, M&A fairness opinions, and independent valuations." data-n="05"><div class="svnum">05</div><div><div class="svname">ESOP & Valuations</div><div class="svdd">SEBI-recognized certificates for ESOP, fairness opinions, and regulatory valuations.</div></div><div class="svarr"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div>
+        <div class="svrow" data-title="Rights Issue & QIP" data-desc="Rights Issues and Qualified Institutional Placements for listed entities. Full documentation, SEBI filing, exchange co-ordination, and investor management." data-n="06"><div class="svnum">06</div><div><div class="svname">Rights Issue & QIP</div><div class="svdd">For listed entities — full documentation, SEBI filings, and investor management.</div></div><div class="svarr"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div>
+      </div>
+    </div>
+    <div class="svvis">
+      <canvas id="svcv"></canvas>
+      <div class="svglow"></div>
+      <div class="svbnum" id="svN">01</div>
+      <div class="svico"><svg viewBox="0 0 24 24"><polyline points="22,7 13,16 8,11 2,17"/><polyline points="16,7 22,7 22,13"/></svg></div>
+      <div class="svtag">Core Service</div>
+      <div class="svtit" id="svT">IPO & SME IPO Management</div>
+      <div class="svbod" id="svB">End-to-end management of Main Board and SME IPOs including DRHP, SEBI filings, roadshows, and post-listing compliance.</div>
+    </div>
+  </div>
+</section>
+
+<!-- APPROACH -->
+<section id="ap">
+  <canvas id="apCv" aria-hidden="true"></canvas>
+  <div class="aph">
+    <div><div class="slbl">Our Method</div><h2 class="stit">How We <em>Work</em></h2></div>
+    <p class="ssub">A disciplined methodology refined over 27 years — combining regulatory mastery, market intelligence, and relentless execution.</p>
+  </div>
+  <div class="apg">
+    <div class="apc"><div class="apbig">01</div><div class="apico"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div><div class="aptit">Discovery & Diagnostics</div><p class="apbod">Deep-dive into business fundamentals, capital structure, and strategic objectives. We identify the optimal transaction architecture before any execution begins.</p><div class="apln"></div></div>
+    <div class="apc"><div class="apbig">02</div><div class="apico"><svg viewBox="0 0 24 24"><polygon points="12,2 22,8.5 22,15.5 12,22 2,15.5 2,8.5"/><line x1="12" y1="22" x2="12" y2="15.5"/><polyline points="22,8.5 12,15.5 2,8.5"/></svg></div><div class="aptit">Structuring & Strategy</div><p class="apbod">Bespoke transaction structuring — pricing, instrument design, regulatory pathway, timeline, and investor targeting. Every deal engineered for success from day one.</p><div class="apln"></div></div>
+    <div class="apc"><div class="apbig">03</div><div class="apico"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><div class="aptit">Investor Access</div><p class="apbod">Two decades of relationships with PE funds, HNIs, family offices, banks, and institutions. We match the right capital to the right opportunity with surgical precision.</p><div class="apln"></div></div>
+    <div class="apc"><div class="apbig">04</div><div class="apico"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9c1.66 0 3.21.45 4.55 1.23"/></svg></div><div class="aptit">Regulatory Execution</div><p class="apbod">SEBI filings, RBI approvals, exchange correspondence — we handle every regulatory touchpoint. Zero errors, zero delays. Our compliance track record is spotless.</p><div class="apln"></div></div>
+    <div class="apc"><div class="apbig">05</div><div class="apico"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><div class="aptit">Capital Closure</div><p class="apbod">From term sheets to final allotment — we drive to close. Our negotiation expertise and relationship depth ensures terms that work long-term for both sides.</p><div class="apln"></div></div>
+    <div class="apc"><div class="apbig">06</div><div class="apico"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><div class="aptit">Post-Transaction Support</div><p class="apbod">Our relationship doesn't end at listing. Ongoing investor relations, compliance monitoring, and strategic advisory — we're a long-term partner, not a transactional advisor.</p><div class="apln"></div></div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="ti">
+  <div id="tiHyperspeedLayer" aria-hidden="true"><canvas id="tiHyperspeedCv"></canvas></div>
+  <div class="slbl" style="justify-content:center;position:relative;z-index:2">Client Voices</div>
+  <h2 class="stit" style="text-align:center;max-width:560px;margin:0 auto;position:relative;z-index:2">What Our <em>Clients</em> Say</h2>
+  <div class="tiw">
+    <div class="tiqm">"</div>
+    <div class="tiq" id="tiQ">Intensive Fiscal's expertise was <span class="tihl">pivotal to the success</span> of Bikaji's IPO — from regulatory filings to investor roadshows, their execution was absolutely flawless.</div>
+    <div class="tia"><strong id="tiN">Shivratan Agarwal</strong><span id="tiR">Chairman, Bikaji Foods International</span></div>
+    <div class="tids"><div class="tidd on" data-i="0"></div><div class="tidd" data-i="1"></div><div class="tidd" data-i="2"></div></div>
+  </div>
+</section>
+
+<!-- SECTORS -->
+<section id="sec">
+  <div class="sech">
+    <div><div class="slbl">Industries</div><h2 class="stit">Sectors We <em>Serve</em></h2></div>
+    <p class="ssub">Deep domain knowledge across India's most dynamic industries — enabling transaction intelligence that generic advisors simply cannot offer.</p>
+  </div>
+  <div class="secg">
+    <div class="secp"><div class="secd b"></div><div class="secn">Real Estate & Infrastructure</div></div>
+    <div class="secp"><div class="secd g"></div><div class="secn">Pharmaceuticals & Healthcare</div></div>
+    <div class="secp"><div class="secd b"></div><div class="secn">IT & E-Commerce</div></div>
+    <div class="secp"><div class="secd g"></div><div class="secn">Jewellery & Gems</div></div>
+    <div class="secp"><div class="secd b"></div><div class="secn">Hospitality & Tourism</div></div>
+    <div class="secp"><div class="secd g"></div><div class="secn">Agri Commodity</div></div>
+    <div class="secp"><div class="secd b"></div><div class="secn">Travel & Logistics</div></div>
+    <div class="secp"><div class="secd g"></div><div class="secn">FMCG & Consumer Brands</div></div>
+    <div class="secp"><div class="secd b"></div><div class="secn">Manufacturing & Industrial</div></div>
+    <div class="secp"><div class="secd g"></div><div class="secn">Financial Services</div></div>
+    <div class="secp"><div class="secd b"></div><div class="secn">Renewable Energy</div></div>
+    <div class="secp"><div class="secd g"></div><div class="secn">Education & EdTech</div></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div id="ctaHyperspeedLayer" aria-hidden="true"><canvas id="ctaHyperspeedCv"></canvas></div>
+  <canvas id="ctaCv" aria-hidden="true"></canvas>
+  <div class="ctag1"></div><div class="ctag2"></div>
+  <div class="ctaring cr1"></div><div class="ctaring cr2"></div><div class="ctaring cr3"></div>
+  <div class="ctaey">Begin Your Capital Journey</div>
+  <h2 class="ctat">Ready to <em>Transform</em><br>Your <span class="bl">Capital</span> Strategy?</h2>
+  <p class="ctas">Join 300+ corporate groups who trust Intensive Fiscal to architect their most consequential transactions.</p>
+  <div class="ctabs">
+    <a class="btnCp" href="mailto:info@intensivefiscal.com">Book a Consultation <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    <a class="btnCs" href="tel:+912222880088"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.69 11.6a19.79 19.79 0 01-3.07-8.67A2 2 0 013.6 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.91 8.56a16 16 0 006.29 6.29l.87-.87a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg> Call Us Now</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <canvas id="ftCv" aria-hidden="true"></canvas>
+  <div class="ftg">
+    <div>
+      <div class="ft-brand">
+        <div class="ft-orb" aria-hidden="true"></div>
+        <div class="ftbn ftbn-anim">Intensive <span class="b">Fiscal</span></div>
+      </div>
+      <p class="ftbp">SEBI Category-I Merchant Bankers. Investment banking, PE syndication, debt structuring and regulatory advisory for India's most ambitious businesses. Est. 1997, Nariman Point, Mumbai.</p>
+    </div>
+    <div class="ftc"><h4>Services</h4><ul><li><a href="#">IPO & SME IPO</a></li><li><a href="#">Private Equity</a></li><li><a href="#">Debt Syndication</a></li><li><a href="#">Open Offer</a></li><li><a href="#">ESOP Valuation</a></li></ul></div>
+    <div class="ftc"><h4>Company</h4><ul><li><a href="#">About Us</a></li><li><a href="#">Our Team</a></li><li><a href="#">Case Studies</a></li><li><a href="#">Careers</a></li><li><a href="#">Disclosures</a></li></ul></div>
+    <div class="ftc"><h4>Contact</h4><ul><li><a href="#">Nariman Point, Mumbai</a></li><li><a href="mailto:info@intensivefiscal.com">info@intensivefiscal.com</a></li><li><a href="tel:+912222880088">+91 22 2288 0088</a></li><li><a href="#">LinkedIn</a></li></ul></div>
+  </div>
+  <div class="ftbot">
+    <span class="ftcp">© 2026 Intensive Fiscal Services Pvt. Ltd. All rights reserved.</span>
+    <span class="ftsebi">SEBI Reg. <span>INM000011000</span> · Category-I Merchant Banker</span>
+  </div>
+</footer>
+
+<script>
+gsap.registerPlugin(ScrollTrigger,ScrollToPlugin);
+
+/* ── CURSOR ── */
+var mx=window.innerWidth/2,my=window.innerHeight/2,rx=mx,ry=my;
+var cD=document.getElementById('cD'),cR=document.getElementById('cR');
+document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;});
+document.addEventListener('mousedown',function(){document.body.classList.add('clk');});
+document.addEventListener('mouseup',function(){document.body.classList.remove('clk');});
+(function cursorTick(){
+  cD.style.transform='translate('+mx+'px,'+my+'px) translate(-50%,-50%)';
+  rx+=(mx-rx)*0.1;ry+=(my-ry)*0.1;
+  cR.style.transform='translate('+rx+'px,'+ry+'px) translate(-50%,-50%)';
+  requestAnimationFrame(cursorTick);
+})();
+document.querySelectorAll('a,button,.svrow,.crd,.secp,.apc').forEach(function(el){
+  el.addEventListener('mouseenter',function(){document.body.classList.add('hov');});
+  el.addEventListener('mouseleave',function(){document.body.classList.remove('hov');});
+});
+
+/* ── MANIFESTO TEXT — build before loader so it's ready ── */
+var mfWords='We don\'t just raise capital — we architect the strategic foundation upon which India\'s most ambitious businesses are built, scaled, and transformed for the next generation of leadership.'.split(' ');
+var mfEm=['strategic','foundation'];
+var mfBl=['transformed'];
+var mfEl=document.getElementById('mftxt');
+mfEl.innerHTML=mfWords.map(function(w){
+  var wl=w.replace(/[^a-zA-Z]/g,'').toLowerCase();
+  var cls='mword';
+  if(mfEm.indexOf(wl)>-1) cls+=' em';
+  if(mfBl.indexOf(wl)>-1) cls+=' bl';
+  return '<span class="'+cls+'">'+w+'</span>';
+}).join(' ');
+
+/* Scroll velocity for particle “burst” when user scrolls (smooth scroll / wheel) */
+window.__scrollVel=0;
+window._heroThree={heroProg:0,pageMorph:0,morphLocked:false};
+
+/* ── GLOBAL — scroll-morphing 3D points (pyramid → tunnel → sphere → wave → diamond) fixed behind page ── */
+(function initGlobalMorphField(){
+  var el=document.getElementById('globalMorphField');
+  if(!el||typeof THREE==='undefined')return;
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var N=reduce?2200:7800;
+  var side=Math.ceil(Math.sqrt(N));
+  var pyramid=new Float32Array(N*3),tunnel=new Float32Array(N*3),sphere=new Float32Array(N*3),wave=new Float32Array(N*3),diamond=new Float32Array(N*3);
+  var out=new Float32Array(N*3),col=new Float32Array(N*3);
+  var i,gx,gy,u,v,th,ph,sr,depth,ang,spread,wx,wz,wy,dx,dy,dz,bx,bz,dist,h,oi;
+  for(i=0;i<N;i++){
+    gx=i%side;gy=(i/side)|0;
+    u=gx/Math.max(1,side-1);v=gy/Math.max(1,side-1);
+    bx=(u-0.5)*2.55;bz=(v-0.5)*2.55;
+    dist=Math.sqrt(bx*bx+bz*bz);
+    h=1.08*(1-Math.min(1,dist/1.48));
+    pyramid[i*3]=bx*0.88;pyramid[i*3+1]=h-0.42;pyramid[i*3+2]=bz*0.88;
+    th=2*Math.PI*u;
+    ph=Math.acos(2*v-1);
+    sr=1.22;
+    sphere[i*3]=sr*Math.sin(ph)*Math.cos(th);
+    sphere[i*3+1]=sr*Math.cos(ph);
+    sphere[i*3+2]=sr*Math.sin(ph)*Math.sin(th);
+    depth=Math.pow(v,0.82);
+    ang=2*Math.PI*u+depth*0.9;
+    spread=0.06+depth*1.72;
+    tunnel[i*3]=Math.cos(ang)*spread;
+    tunnel[i*3+1]=0.92-depth*1.42+Math.cos(ang*4)*0.05*(1-depth);
+    tunnel[i*3+2]=Math.sin(ang)*spread*0.52-depth*0.38;
+    wx=(u-0.5)*2.55;wz=(v-0.5)*2.55;
+    wy=0.42*Math.sin(wx*2.7+wz*1.9)+0.12*Math.sin(wx*5.1);
+    wave[i*3]=wx;wave[i*3+1]=wy;wave[i*3+2]=wz;
+    dx=(u-0.5)*2.35;dy=(v-0.5)*2.35;
+    dz=0.52*(Math.abs(dx)-Math.abs(dy));
+    diamond[i*3]=dx;diamond[i*3+1]=dy*0.72;diamond[i*3+2]=dz;
+    var cool=0.35+u*0.25;
+    col[i*3]=0.45+cool*0.2;col[i*3+1]=0.62+cool*0.18;col[i*3+2]=0.95;
+  }
+  function smoothstep(t){t=Math.max(0,Math.min(1,t));return t*t*(3-2*t);}
+  function lerp3(a,b,t,o,oi){
+    var k=smoothstep(t);
+    o[oi]=a[oi]+(b[oi]-a[oi])*k;
+    o[oi+1]=a[oi+1]+(b[oi+1]-a[oi+1])*k;
+    o[oi+2]=a[oi+2]+(b[oi+2]-a[oi+2])*k;
+  }
+  function blend5(p,a,b,c,d,e,outBuf){
+    var s=p*4,q,src,dst;
+    if(s<1){q=s;src=a;dst=b;}
+    else if(s<2){q=s-1;src=b;dst=c;}
+    else if(s<3){q=s-2;src=c;dst=d;}
+    else{q=Math.min(1,s-3);src=d;dst=e;}
+    for(i=0;i<N;i++){oi=i*3;lerp3(src,dst,q,outBuf,oi);}
+  }
+  var scene=new THREE.Scene();
+  var cam=new THREE.PerspectiveCamera(52,1,0.08,120);
+  cam.position.set(0,0.08,4.35);
+  var renderer=new THREE.WebGLRenderer({antialias:true,alpha:true,powerPreference:'high-performance'});
+  renderer.setClearColor(0x000000,0);
+  el.appendChild(renderer.domElement);
+  var geo=new THREE.BufferGeometry();
+  geo.setAttribute('position',new THREE.BufferAttribute(out,3));
+  geo.setAttribute('color',new THREE.BufferAttribute(col,3));
+  var mat=new THREE.PointsMaterial({
+    size:reduce?0.014:0.026,
+    vertexColors:true,
+    transparent:true,
+    opacity:0.88,
+    depthWrite:false,
+    blending:THREE.AdditiveBlending,
+    sizeAttenuation:true
+  });
+  var points=new THREE.Points(geo,mat);
+  scene.add(points);
+  var mx=0,my=0,t=0;
+  document.addEventListener('mousemove',function(e){
+    mx=(e.clientX/window.innerWidth-0.5)*2;
+    my=(e.clientY/window.innerHeight-0.5)*2;
+  });
+  function resize(){
+    var w=el.clientWidth,h=el.clientHeight;
+    if(w<2||h<2)return;
+    cam.aspect=w/h;
+    cam.updateProjectionMatrix();
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+    renderer.setSize(w,h,false);
+  }
+  resize();
+  if(typeof ResizeObserver!=='undefined')new ResizeObserver(resize).observe(el);
+  window.addEventListener('resize',resize);
+  function tick(){
+    var locked=!!window._heroThree.morphLocked;
+    var pm=Math.min(1,Math.max(0,window._heroThree.pageMorph||0));
+    var sv=window.__scrollVel||0;
+    t+=locked?0:0.0012+Math.min(0.006,Math.abs(sv)*2e-6);
+    for(i=0;i<N;i++){
+      gx=i%side;gy=(i/side)|0;
+      u=gx/Math.max(1,side-1);v=gy/Math.max(1,side-1);
+      wx=(u-0.5)*2.55;wz=(v-0.5)*2.55;
+      wy=0.42*Math.sin(wx*2.7+wz*1.9+t*1.4)+0.12*Math.sin(wx*5.1-t*0.8);
+      wave[i*3]=wx;wave[i*3+1]=wy;wave[i*3+2]=wz;
+    }
+    var morphT=locked?1:(reduce?0.38:Math.min(1,Math.pow(Math.max(0,pm),0.72)));
+    blend5(morphT,pyramid,tunnel,sphere,wave,diamond,out);
+    var amp=locked?0:(0.018+Math.abs(sv)*0.00012);
+    var posAttr=geo.attributes.position;
+    for(i=0;i<N;i++){
+      oi=i*3;
+      posAttr.array[oi]=out[oi]+Math.sin(t*1.1+i*0.02)*amp;
+      posAttr.array[oi+1]=out[oi+1]+Math.cos(t*0.9+i*0.017)*amp*0.6;
+      posAttr.array[oi+2]=out[oi+2]+Math.sin(t*0.7+i*0.011)*amp*0.45;
+    }
+    posAttr.needsUpdate=true;
+    if(locked){
+      points.rotation.y=1.85+mx*0.08;
+      points.rotation.x=0.35+my*0.06;
+      points.rotation.z=0;
+      cam.position.z=3;
+      cam.position.y=0.24;
+    }else{
+      points.rotation.y=mx*0.12+pm*1.85+t*0.06;
+      points.rotation.x=my*0.09+pm*0.35;
+      points.rotation.z=0;
+      cam.position.z=4.35-pm*1.35;
+      cam.position.y=0.06+pm*0.18;
+    }
+    renderer.render(scene,cam);
+    requestAnimationFrame(tick);
+  }
+  tick();
+})();
+
+/* ── HERO — Three.js point sphere (rotation + camera accelerate with scroll through hero) ── */
+(function initHeroThree(){
+  var el=document.getElementById('sphCv');
+  if(!el||typeof THREE==='undefined')return;
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var scene=new THREE.Scene();
+  var cam=new THREE.PerspectiveCamera(48,1,0.1,100);
+  cam.position.set(0,0,5.45);
+  var renderer=new THREE.WebGLRenderer({antialias:true,alpha:true,powerPreference:'high-performance'});
+  renderer.setClearColor(0x000000,0);
+  el.appendChild(renderer.domElement);
+  var N=reduce?1400:3400,phi=Math.PI*(3-Math.sqrt(5));
+  var pos=new Float32Array(N*3),col=new Float32Array(N*3);
+  for(var i=0;i<N;i++){
+    var y=1-(i/(N-1))*2,r=Math.sqrt(Math.max(0,1-y*y)),th=phi*i;
+    var x=Math.cos(th)*r,z=Math.sin(th)*r;
+    pos[i*3]=x*1.78;pos[i*3+1]=y*1.78;pos[i*3+2]=z*1.78;
+    var t=(y+1)*0.5;
+    col[i*3]=0.18+t*0.14;col[i*3+1]=0.38+t*0.45;col[i*3+2]=0.72+t*0.24;
+  }
+  var geo=new THREE.BufferGeometry();
+  geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
+  geo.setAttribute('color',new THREE.BufferAttribute(col,3));
+  var mat=new THREE.PointsMaterial({
+    size:reduce?0.022:0.042,
+    vertexColors:true,
+    transparent:true,
+    opacity:0.98,
+    depthWrite:false,
+    blending:THREE.AdditiveBlending,
+    sizeAttenuation:true
+  });
+  var points=new THREE.Points(geo,mat);
+  points.position.x=0;
+  scene.add(points);
+  var mx=0,my=0;
+  document.addEventListener('mousemove',function(e){
+    mx=(e.clientX/window.innerWidth-0.5)*2;
+    my=(e.clientY/window.innerHeight-0.5)*2;
+  });
+  function resize(){
+    var w=el.clientWidth,h=el.clientHeight;
+    if(w<2||h<2)return;
+    cam.aspect=w/h;
+    cam.updateProjectionMatrix();
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+    renderer.setSize(w,h,false);
+  }
+  resize();
+  if(typeof ResizeObserver!=='undefined')new ResizeObserver(resize).observe(el);
+  window.addEventListener('resize',resize);
+  var rot=0;
+  function tick(){
+    var hp=window._heroThree.heroProg||0;
+    if(reduce){
+      requestAnimationFrame(tick);
+      cam.position.z=5.2-hp*0.5;
+      points.rotation.y=0.5+hp*0.4;
+      points.rotation.x=my*0.08;
+      points.rotation.z=hp*0.2;
+      renderer.render(scene,cam);
+      return;
+    }
+    requestAnimationFrame(tick);
+    rot+=0.001+mx*0.00028+hp*0.0042;
+    points.rotation.y=rot;
+    points.rotation.x=my*0.12+hp*0.08;
+    points.rotation.z=hp*0.38;
+    cam.position.z=5.45-hp*1.15;
+    renderer.render(scene,cam);
+  }
+  tick();
+})();
+
+/* ── CTA: soft blue / white / mint hyperspeed (the subtle streak look you liked) ── */
+(function initCtaHyperspeed(){
+  var wrap=document.getElementById('ctaHyperspeedLayer');
+  var cv=document.getElementById('ctaHyperspeedCv');
+  if(!wrap||!cv)return;
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduce)return;
+  var ctx=cv.getContext('2d');
+  var W=0,H=0,cx=0,cy=0,dpr=1;
+  var n=145;
+  var stars=[];
+  var i,s,sx,sy,px,py,sp,grd,a;
+  for(i=0;i<n;i++){
+    stars.push({x:(Math.random()-0.5)*2.4,y:(Math.random()-0.5)*2.4,z:Math.random()*0.9+0.1});
+  }
+  var vis=false;
+  var io=new IntersectionObserver(function(ent){vis=ent[0]&&ent[0].isIntersecting;},{threshold:0.06,rootMargin:'80px'});
+  io.observe(wrap);
+  function resize(){
+    var p=cv.parentElement;
+    if(!p||p.clientWidth<2)return;
+    dpr=Math.min(window.devicePixelRatio||1,2);
+    W=p.clientWidth;H=p.clientHeight;
+    cv.width=Math.floor(W*dpr);
+    cv.height=Math.floor(H*dpr);
+    cv.style.width=W+'px';
+    cv.style.height=H+'px';
+    ctx.setTransform(1,0,0,1,0,0);
+    ctx.scale(dpr,dpr);
+    cx=W*0.5;cy=H*0.52;
+  }
+  resize();
+  if(typeof ResizeObserver!=='undefined')new ResizeObserver(resize).observe(wrap);
+  window.addEventListener('resize',resize);
+  function tick(){
+    requestAnimationFrame(tick);
+    if(!vis)return;
+    var layOp=0;
+    try{layOp=parseFloat(getComputedStyle(wrap).opacity)||0;}catch(err){layOp=0;}
+    if(layOp<0.04)return;
+    ctx.fillStyle='rgba(2,9,15,0.44)';
+    ctx.fillRect(0,0,W,H);
+    sp=0.024+Math.min(0.048,Math.abs(window.__scrollVel||0)*2.8e-6);
+    for(i=0;i<n;i++){
+      s=stars[i];
+      s.z-=sp*(0.52+s.z*0.45);
+      if(s.z<=0.03){
+        s.z=1;
+        s.x=(Math.random()-0.5)*2.4;
+        s.y=(Math.random()-0.5)*2.4;
+        s.px=s.py=undefined;
+      }
+      sx=cx+(s.x/s.z)*360;
+      sy=cy+(s.y/s.z)*280;
+      px=s.px;py=s.py;
+      s.px=sx;s.py=sy;
+      if(px!==undefined&&py!==undefined){
+        a=Math.min(1,(1-s.z)*1.2)*layOp;
+        grd=ctx.createLinearGradient(px,py,sx,sy);
+        grd.addColorStop(0,'rgba(42,124,224,0)');
+        grd.addColorStop(0.48,'rgba(42,124,224,'+(0.2*a)+')');
+        grd.addColorStop(0.72,'rgba(61,212,112,'+(0.14*a)+')');
+        grd.addColorStop(1,'rgba(255,255,255,'+(0.26*a)+')');
+        ctx.strokeStyle=grd;
+        ctx.lineWidth=Math.max(0.5,2.2-s.z*1.8);
+        ctx.beginPath();
+        ctx.moveTo(px,py);
+        ctx.lineTo(sx,sy);
+        ctx.stroke();
+      }
+    }
+  }
+  tick();
+})();
+
+/* ── Testimonials: intense Cyberpunk hyperspeed (dense neon tunnel — closer to reactbits.dev preset) ── */
+(function initTiHyperspeed(){
+  var wrap=document.getElementById('tiHyperspeedLayer');
+  var cv=document.getElementById('tiHyperspeedCv');
+  var tiSec=document.getElementById('ti');
+  if(!wrap||!cv||!tiSec)return;
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduce)return;
+  var ctx=cv.getContext('2d');
+  var W=0,H=0,cx=0,cy=0,dpr=1,time=0;
+  var n=340;
+  var stars=[];
+  var i,s,sx,sy,px,py,sp,grd,a,curve,boost=0,tiPress=0,br,phase;
+  for(i=0;i<n;i++){
+    stars.push({
+      x:(Math.random()-0.5)*2.65,
+      y:(Math.random()-0.5)*2.65,
+      z:Math.random()*0.94+0.06,
+      hue:(Math.random()*6)|0
+    });
+  }
+  var vis=false;
+  var io=new IntersectionObserver(function(ent){
+    vis=ent[0]&&ent[0].isIntersecting;
+  },{threshold:0.04,rootMargin:'120px'});
+  io.observe(wrap);
+  function tiPointerDown(){
+    if(!vis)return;
+    tiPress=1;
+  }
+  function tiPointerUp(){
+    tiPress=0;
+  }
+  tiSec.addEventListener('mousedown',tiPointerDown);
+  tiSec.addEventListener('touchstart',tiPointerDown,{passive:true});
+  window.addEventListener('mouseup',tiPointerUp);
+  window.addEventListener('touchend',tiPointerUp);
+  function resize(){
+    var p=cv.parentElement;
+    if(!p||p.clientWidth<2)return;
+    dpr=Math.min(window.devicePixelRatio||1,2);
+    W=p.clientWidth;H=p.clientHeight;
+    cv.width=Math.floor(W*dpr);
+    cv.height=Math.floor(H*dpr);
+    cv.style.width=W+'px';
+    cv.style.height=H+'px';
+    ctx.setTransform(1,0,0,1,0,0);
+    ctx.scale(dpr,dpr);
+    cx=W*0.5;cy=H*0.46;
+  }
+  resize();
+  if(typeof ResizeObserver!=='undefined')new ResizeObserver(resize).observe(wrap);
+  window.addEventListener('resize',resize);
+  function tick(){
+    requestAnimationFrame(tick);
+    if(!vis)return;
+    var layOp=0;
+    try{layOp=parseFloat(getComputedStyle(wrap).opacity)||0;}catch(err){layOp=0;}
+    if(layOp<0.04)return;
+    time+=0.018;
+    boost+=(tiPress-boost)*0.12;
+    ctx.fillStyle='rgba(0,0,0,0.14)';
+    ctx.fillRect(0,0,W,H);
+    sp=(0.05+Math.min(0.09,Math.abs(window.__scrollVel||0)*5e-6))*(1+boost*3.2);
+    for(i=0;i<n;i++){
+      s=stars[i];
+      s.z-=sp*(0.48+s.z*0.5);
+      if(s.z<=0.025){
+        s.z=1;
+        s.x=(Math.random()-0.5)*2.65;
+        s.y=(Math.random()-0.5)*2.65;
+        s.hue=(Math.random()*6)|0;
+        s.px=s.py=undefined;
+      }
+      phase=time*2.1+s.x*4+s.y*3;
+      curve=Math.sin(phase)*0.072*(1-s.z)+Math.cos(phase*0.7)*0.035*(1-s.z);
+      br=Math.min(1.35,(1-s.z)*2.1)*layOp;
+      sx=cx+(s.x/s.z+curve)*620;
+      sy=cy+(s.y/s.z)*500;
+      px=s.px;py=s.py;
+      s.px=sx;s.py=sy;
+      if(px!==undefined&&py!==undefined){
+        a=br;
+        grd=ctx.createLinearGradient(px,py,sx,sy);
+        if(s.hue<=1){
+          grd.addColorStop(0,'rgba(0,255,247,0)');
+          grd.addColorStop(0.35,'rgba(0,255,247,'+(0.55*a)+')');
+          grd.addColorStop(1,'rgba(255,255,255,'+(0.75*a)+')');
+        }else if(s.hue===2){
+          grd.addColorStop(0,'rgba(255,0,170,0)');
+          grd.addColorStop(0.4,'rgba(255,45,180,'+(0.6*a)+')');
+          grd.addColorStop(1,'rgba(255,120,220,'+(0.5*a)+')');
+        }else if(s.hue===3){
+          grd.addColorStop(0,'rgba(180,80,255,0)');
+          grd.addColorStop(0.45,'rgba(192,132,252,'+(0.58*a)+')');
+          grd.addColorStop(1,'rgba(0,255,247,'+(0.45*a)+')');
+        }else if(s.hue===4){
+          grd.addColorStop(0,'rgba(255,0,200,0)');
+          grd.addColorStop(0.38,'rgba(255,80,200,'+(0.52*a)+')');
+          grd.addColorStop(1,'rgba(147,51,234,'+(0.55*a)+')');
+        }else{
+          grd.addColorStop(0,'rgba(100,200,255,0)');
+          grd.addColorStop(0.5,'rgba(168,85,247,'+(0.5*a)+')');
+          grd.addColorStop(1,'rgba(0,255,247,'+(0.62*a)+')');
+        }
+        ctx.strokeStyle=grd;
+        ctx.lineWidth=Math.max(1.05,4.2-s.z*3.2);
+        ctx.globalCompositeOperation='lighter';
+        ctx.beginPath();
+        ctx.moveTo(px,py);
+        ctx.lineTo(sx,sy);
+        ctx.stroke();
+        ctx.globalCompositeOperation='source-over';
+      }
+    }
+  }
+  tick();
+})();
+
+/* ── Focus band — denser field, reacts to scroll velocity ── */
+(function initFocusBand(){
+  var cv=document.getElementById('focusCv');
+  if(!cv)return;
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ctx=cv.getContext('2d');
+  var W,H;
+  var parts=Array.from({length:reduce?90:260},function(_,k){
+    return{
+      x:Math.random()*600,y:Math.random()*400,
+      vx:(Math.random()-0.5)*0.28,vy:(Math.random()-0.5)*0.2-0.05,
+      r:Math.random()*1.6+0.4,
+      op:Math.random()*0.14+0.04,
+      gr:Math.random()>0.55
+    };
+  });
+  function resize(){
+    var p=cv.parentElement;
+    var dpr=reduce?1:Math.min(window.devicePixelRatio||1,2);
+    W=cv.width=(p?p.clientWidth:600)*dpr;
+    H=cv.height=(p?p.clientHeight:400)*dpr;
+  }
+  resize();
+  if(typeof ResizeObserver!=='undefined'&&cv.parentElement)new ResizeObserver(resize).observe(cv.parentElement);
+  window.addEventListener('resize',resize);
+  function draw(){
+    if(!W||!H){if(!reduce)requestAnimationFrame(draw);return;}
+    var sv=window.__scrollVel||0;
+    ctx.clearRect(0,0,W,H);
+    var sx=W/600,sy=H/400;
+    parts.forEach(function(d){
+      if(!reduce){
+        d.x+=d.vx+sv*0.018;d.y+=d.vy+Math.abs(sv)*0.006;
+        if(d.x<0)d.x=600;if(d.x>600)d.x=0;if(d.y<0)d.y=400;if(d.y>400)d.y=0;
+      }
+      ctx.beginPath();
+      ctx.arc(d.x*sx,d.y*sy,d.r*Math.max(sx,sy)*0.95,0,Math.PI*2);
+      ctx.fillStyle=d.gr?'rgba(61,212,112,'+d.op+')':'rgba(42,124,224,'+d.op+')';
+      ctx.fill();
+    });
+    if(!reduce)requestAnimationFrame(draw);
+  }
+  if(reduce)draw();
+  else requestAnimationFrame(draw);
+})();
+
+/* ── Section ambient canvases (each with distinct motion + scroll coupling) ── */
+function initSectionParticles(id,cfg){
+  cfg=cfg||{};
+  var cv=document.getElementById(id);
+  if(!cv)return;
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ctx=cv.getContext('2d');
+  var W,H,t=0;
+  var mode=cfg.mode||'blue';
+  var n=reduce?60:cfg.n||200;
+  var pts=Array.from({length:n},function(){
+    return{x:Math.random(),y:Math.random(),vx:(Math.random()-0.5)*cfg.vx||0.00025,vy:(Math.random()-0.5)*cfg.vy||0.0002,s:Math.random()*cfg.smax||1.8,c:Math.random()};
+  });
+  function col(c,a){
+    if(mode==='green')return'rgba(61,212,112,'+a+')';
+    if(mode==='dual')return c>0.5?'rgba(61,212,112,'+a+')':'rgba(42,124,224,'+a+')';
+    if(mode==='violet')return'rgba(167,139,250,'+a+')';
+    return'rgba(42,124,224,'+a+')';
+  }
+  function resize(){
+    var p=cv.parentElement;
+    if(!p)return;
+    var dpr=reduce?1:Math.min(window.devicePixelRatio||1,2);
+    W=cv.width=p.offsetWidth*dpr;
+    H=cv.height=p.offsetHeight*dpr;
+  }
+  resize();
+  if(cv.parentElement&&typeof ResizeObserver!=='undefined')new ResizeObserver(resize).observe(cv.parentElement);
+  function loop(){
+    if(!W||!H){requestAnimationFrame(loop);return;}
+    var sv=window.__scrollVel||0;
+    t+=0.004+Math.min(0.012,Math.abs(sv)*1e-5);
+    ctx.clearRect(0,0,W,H);
+    var i,d,px,py;
+    for(i=0;i<pts.length;i++){
+      d=pts[i];
+      d.x+=d.vx+sv*8e-6*Math.sin(d.c*12+t);
+      d.y+=d.vy+Math.sin(t+d.c*8)*0.00015+Math.abs(sv)*2e-6;
+      if(d.x<0)d.x+=1;if(d.x>1)d.x-=1;if(d.y<0)d.y+=1;if(d.y>1)d.y-=1;
+      px=d.x*W;py=d.y*H;
+      ctx.beginPath();
+      ctx.arc(px,py,d.s*(W/900)*(0.85+0.15*Math.sin(t*2+d.c)),0,Math.PI*2);
+      ctx.fillStyle=col(d.c,0.04+0.06*Math.sin(t+d.c*5));
+      ctx.fill();
+    }
+    if(cfg.lines&&!reduce){
+      for(i=0;i<pts.length;i+=3){
+        var j,a,b,dx,dy,dd;
+        for(j=i+1;j<Math.min(i+10,pts.length);j++){
+          a=pts[i];b=pts[j];
+          dx=a.x-b.x;dy=a.y-b.y;dd=dx*dx+dy*dy;
+          if(dd<0.0016){
+            ctx.beginPath();
+            ctx.moveTo(a.x*W,a.y*H);ctx.lineTo(b.x*W,b.y*H);
+            ctx.strokeStyle=col(a.c,0.03*(1-dd/0.0016));ctx.lineWidth=0.5;ctx.stroke();
+          }
+        }
+      }
+    }
+    requestAnimationFrame(loop);
+  }
+  loop();
+}
+initSectionParticles('mfCv',{mode:'dual',n:260,vx:0.0002,vy:0.00012,smax:2.2,lines:true});
+initSectionParticles('crdsCv',{mode:'dual',n:220,lines:true});
+initSectionParticles('svcCv',{mode:'blue',n:200,lines:false});
+initSectionParticles('apCv',{mode:'green',n:200,lines:true});
+initSectionParticles('ctaCv',{mode:'dual',n:280,lines:true,vx:0.0003,vy:0.00025});
+initSectionParticles('ftCv',{mode:'blue',n:100,vx:0.00008,vy:0.00006,smax:1.2});
+
+/* ── CARD CANVASES ── */
+document.querySelectorAll('.crdcv').forEach(function(cv){
+  var type=cv.dataset.t;
+  var ctx=cv.getContext('2d');
+  var W,H,t=0;
+  function resize(){W=cv.width=cv.offsetWidth;H=cv.height=cv.offsetHeight;}
+  resize();
+  new ResizeObserver(resize).observe(cv);
+  (function draw(){
+    ctx.clearRect(0,0,W,H);t+=.008;
+    if(type==='wave'){
+      for(var i=0;i<4;i++){
+        ctx.beginPath();
+        var amp=H*.11*(1-i*.18),freq=.8+i*.15,phase=t*(1+i*.3);
+        for(var x=0;x<=W;x+=2){
+          var y=H*.5+Math.sin(x/W*Math.PI*2*freq+phase)*amp+Math.sin(x/W*Math.PI*3+t)*amp*.4;
+          x===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+        }
+        ctx.strokeStyle='rgba(61,212,112,'+(0.07-i*.012)+')';ctx.lineWidth=1;ctx.stroke();
+      }
+    } else if(type==='dots'){
+      for(var i=0;i<38;i++){
+        var angle=i/38*Math.PI*2+t*.5,rr=H*.27*(1+Math.sin(t+i*.4)*.14);
+        ctx.beginPath();ctx.arc(W*.5+Math.cos(angle)*rr,H*.5+Math.sin(angle)*rr*.6,1.5,0,Math.PI*2);
+        ctx.fillStyle='rgba(255,160,80,'+(0.08+Math.sin(t*2+i)*.04)+')';ctx.fill();
+      }
+    } else if(type==='grid'){
+      var step=H*.13;
+      for(var x=0;x<W;x+=step){for(var y=0;y<H;y+=step){
+        var osc=Math.sin(t+x/W*3+y/H*2)*.4+.6;
+        ctx.beginPath();ctx.arc(x,y,1.2*osc,0,Math.PI*2);
+        ctx.fillStyle='rgba(61,212,112,'+(0.06*osc)+')';ctx.fill();
+      }}
+    } else if(type==='rings'){
+      for(var i=0;i<5;i++){
+        var rr=H*(.08+i*.11)*(1+Math.sin(t*.8+i*.5)*.08);
+        ctx.beginPath();ctx.arc(W*.5,H*.5,rr,0,Math.PI*2);
+        ctx.strokeStyle='rgba(100,130,255,'+(0.06-i*.01)+')';ctx.lineWidth=.8;ctx.stroke();
+      }
+    }
+    requestAnimationFrame(draw);
+  })();
+});
+
+/* ── SVC PANEL CANVAS ── */
+(function(){
+  var cv=document.getElementById('svcv');
+  if(!cv)return;
+  var ctx=cv.getContext('2d');var W,H;
+  function resize(){W=cv.width=cv.offsetWidth;H=cv.height=cv.offsetHeight;}
+  resize();window.addEventListener('resize',resize);
+  var p=Array.from({length:80},function(){return{x:Math.random()*500,y:Math.random()*700,vx:(Math.random()-.5)*.15,vy:(Math.random()-.5)*.15,r:Math.random()*1.3+.3,op:Math.random()*.16+.04};});
+  (function draw(){
+    if(!W||!H){requestAnimationFrame(draw);return;}
+    ctx.clearRect(0,0,W,H);
+    p.forEach(function(d){
+      d.x+=d.vx;d.y+=d.vy;
+      if(d.x<0)d.x=W;if(d.x>W)d.x=0;if(d.y<0)d.y=H;if(d.y>H)d.y=0;
+      ctx.beginPath();ctx.arc(d.x,d.y,d.r,0,Math.PI*2);
+      ctx.fillStyle='rgba(42,124,224,'+d.op+')';ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  })();
+})();
+
+/* ══════════════════════════════════════════════════
+   LOADER — animate then fire startAll
+══════════════════════════════════════════════════ */
+var ldEl=document.getElementById('ld');
+var ldF=document.getElementById('ldF');
+var ldPEl=document.getElementById('ldP');
+gsap.to('.ld-logo .ch',{y:0,duration:1.1,stagger:.028,ease:'expo.out',delay:.2});
+gsap.to('.ld-sub span',{y:0,duration:.9,ease:'expo.out',delay:.45});
+var pv=0;
+var ltick=setInterval(function(){
+  pv=Math.min(100,pv+Math.floor(Math.random()*10)+4);
+  ldF.style.width=pv+'%';
+  ldPEl.textContent=pv+'%';
+  if(pv>=100){
+    clearInterval(ltick);
+    setTimeout(function(){
+      gsap.to(ldEl,{opacity:0,y:-40,duration:1,ease:'expo.inOut',onComplete:function(){
+        ldEl.style.display='none';
+        startAll();
+      }});
+    },260);
+  }
+},38);
+
+/* ══════════════════════════════════════════════════
+   startAll — everything fires AFTER loader gone
+══════════════════════════════════════════════════ */
+function startAll(){
+
+  var navEl=document.getElementById('nav');
+  var spb=document.getElementById('spb');
+  var mqEl=document.getElementById('mqt');
+  var reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var lenis=null;
+
+  if(!reduceMotion&&typeof Lenis!=='undefined'){
+    lenis=new Lenis({lerp:0.09,smoothWheel:true,smoothTouch:false});
+    lenis.on('scroll',ScrollTrigger.update);
+    ScrollTrigger.scrollerProxy(document.documentElement,{
+      scrollTop:function(value){
+        if(arguments.length)lenis.scrollTo(value,{immediate:true});
+        return lenis.scroll;
+      },
+      getBoundingClientRect:function(){
+        return{top:0,left:0,width:window.innerWidth,height:window.innerHeight};
+      },
+      pinType:document.documentElement.style.transform?'transform':'fixed'
+    });
+    gsap.ticker.add(function(time){lenis.raf(time*1000);});
+    gsap.ticker.lagSmoothing(0);
+  }
+
+  var lastMarqueeY=0;
+  var navScrollLatch=0;
+  var ga90=false;
+  var lastScrollForVel=null;
+
+  function scrollYNow(){
+    return lenis?lenis.scroll:(window.scrollY||document.documentElement.scrollTop);
+  }
+
+  function onScrollFrame(){
+    var y=scrollYNow();
+    if(lastScrollForVel===null)lastScrollForVel=y;
+    var raw=y-lastScrollForVel;
+    window.__scrollVel+=(raw-window.__scrollVel)*0.32;
+    lastScrollForVel=y;
+    var doc=document.documentElement;
+    var maxS=Math.max(1,doc.scrollHeight-window.innerHeight);
+    var pct=(y/maxS)*100;
+    if(spb)spb.style.width=pct+'%';
+    if(!ga90&&pct>=90){ga90=true;try{gtag('event','scroll',{percent_scrolled:90});}catch(err){}}
+
+    navEl.classList.toggle('sc',y>60);
+
+    if(mqEl)mqEl.classList.toggle('rev',y<lastMarqueeY);
+    lastMarqueeY=y;
+
+    var delta=y-navScrollLatch;
+    var th=52;
+    if(y<window.innerHeight)navEl.classList.remove('nav-hide');
+    else{
+      if(delta>th)navEl.classList.add('nav-hide');
+      if(delta<-th)navEl.classList.remove('nav-hide');
+    }
+    if(Math.abs(delta)>th)navScrollLatch=y;
+  }
+
+  if(lenis)lenis.on('scroll',onScrollFrame);
+  else window.addEventListener('scroll',onScrollFrame,{passive:true});
+  onScrollFrame();
+
+  /* hero reveal */
+  var htl=gsap.timeline({defaults:{ease:'expo.out'}});
+  htl
+    .to('#hkick',{opacity:1,y:0,duration:.9,delay:.1})
+    .to('.hw',{y:'0%',duration:1.2,stagger:.13,ease:'expo.out'},'-=.55')
+    .to('#hsub',{opacity:1,y:0,duration:.9},'-=.6')
+    .to('#hbtns',{opacity:1,y:0,duration:.8},'-=.6')
+    .to('#hfloats',{opacity:1,duration:.8},'-=.65')
+    .to('#hscrl',{opacity:1,duration:.8},'-=.65');
+
+  /* hero parallax */
+  gsap.to('#sphCv',{yPercent:10,ease:'none',scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom top',scrub:1.5}});
+  gsap.to('.hc',{yPercent:9,ease:'none',scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom top',scrub:2}});
+
+  /* hero scroll progress → WebGL point sphere only */
+  if(!reduceMotion){
+    ScrollTrigger.create({
+      trigger:'#hero',
+      start:'top top',
+      end:'bottom top',
+      scrub:0.65,
+      onUpdate:function(self){window._heroThree.heroProg=self.progress;}
+    });
+    gsap.to('#focusCv',{
+      yPercent:-15,
+      ease:'none',
+      scrollTrigger:{trigger:'#focusBand',start:'top bottom',end:'bottom top',scrub:1}
+    });
+    gsap.fromTo('.focus-inner',{
+      y:56,
+      opacity:0.35
+    },{
+      y:0,
+      opacity:1,
+      ease:'none',
+      scrollTrigger:{trigger:'#focusBand',start:'top 88%',end:'center center',scrub:0.9}
+    });
+    gsap.set('#mfCv,#ctaCv,#apCv',{transformOrigin:'50% 50%'});
+    gsap.fromTo('#mfCv',
+      {scale:1.2,opacity:0.25,rotation:0},
+      {scale:1,opacity:0.72,rotation:2.5,ease:'none',scrollTrigger:{trigger:'#mf',start:'top bottom',end:'center center',scrub:1.1}}
+    );
+    gsap.to('#crdsCv',{
+      yPercent:-8,
+      ease:'none',
+      scrollTrigger:{trigger:'#crds',start:'top bottom',end:'bottom top',scrub:1.2}
+    });
+    gsap.to('#svcCv',{
+      yPercent:6,
+      opacity:0.55,
+      ease:'none',
+      scrollTrigger:{trigger:'#svc',start:'top bottom',end:'bottom top',scrub:1}
+    });
+    gsap.to('#apCv',{
+      scale:1.08,
+      yPercent:-5,
+      ease:'none',
+      scrollTrigger:{trigger:'#ap',start:'top bottom',end:'bottom top',scrub:1.1}
+    });
+    gsap.fromTo('#ctaCv',
+      {scale:1.15,opacity:0.35},
+      {scale:1,opacity:0.6,ease:'none',scrollTrigger:{trigger:'#cta',start:'top bottom',end:'center center',scrub:0.9}}
+    );
+    gsap.to('#ftCv',{
+      yPercent:-6,
+      ease:'none',
+      scrollTrigger:{trigger:'footer',start:'top bottom',end:'bottom top',scrub:1}
+    });
+    gsap.fromTo('#tiHyperspeedLayer',
+      {opacity:0},
+      {opacity:1,ease:'none',scrollTrigger:{trigger:'#ti',start:'top 92%',end:'top 22%',scrub:0.45}}
+    );
+    gsap.fromTo('#ctaHyperspeedLayer',
+      {opacity:0},
+      {opacity:1,ease:'none',scrollTrigger:{trigger:'#cta',start:'top 92%',end:'top 32%',scrub:0.55}}
+    );
+  }
+
+  /* stats strip — horizontal clip reveal (WQF ethos section pattern) */
+  if(!reduceMotion){
+    gsap.to('.sstrip',{
+      clipPath:'inset(0 0% 0 0)',
+      duration:1.2,
+      ease:'power2.inOut',
+      scrollTrigger:{trigger:'.sstrip',start:'top 90%',toggleActions:'play none none reverse'}
+    });
+  }else{
+    gsap.set('.sstrip',{clipPath:'inset(0 0% 0 0)'});
+  }
+
+  /* counters */
+  function animCnt(el){
+    var target=+el.dataset.t,dur=2200,s=performance.now();
+    (function step(n){var p2=Math.min((n-s)/dur,1);el.textContent=Math.round((1-Math.pow(1-p2,4))*target);if(p2<1)requestAnimationFrame(step);})(s);
+  }
+  var cio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){animCnt(e.target);cio.unobserve(e.target);}});},{threshold:.5});
+  document.querySelectorAll('.counter,.cnt').forEach(function(el){cio.observe(el);});
+
+  /* stat boxes */
+  gsap.from('.sbox',{opacity:0,y:50,skewY:2,duration:1.1,ease:'expo.out',stagger:.08,scrollTrigger:{trigger:'.sstrip',start:'top 88%',toggleActions:'play none none reverse'}});
+
+  /* horizontal pin — global particle morph (01→04) scrubs only with this strip; then holds */
+  if(window.innerWidth>900){
+    var hpT=document.getElementById('hpT');
+    var panels=Array.from(hpT.querySelectorAll('.hpan'));
+    var totalPx=(panels.length-1)*window.innerWidth;
+    var hpEndStr='+='+(totalPx+window.innerWidth*.6);
+    var dots=document.querySelectorAll('.hpdot');
+    var progs=document.querySelectorAll('.hpprog');
+    var dotsWrap=document.getElementById('hpdots');
+
+    gsap.to(hpT,{
+      x:-totalPx,ease:'none',
+      scrollTrigger:{
+        trigger:'#hpW',pin:true,scrub:1,
+        start:'top top',end:hpEndStr,anticipatePin:1,
+        onEnter:function(){
+          dotsWrap.style.opacity='1';dotsWrap.style.pointerEvents='none';
+          window._heroThree.morphLocked=false;
+          gsap.to('#globalMorphField',{opacity:1,duration:0.5,ease:'power2.out'});
+        },
+        onLeave:function(){
+          dotsWrap.style.opacity='0';
+          window._heroThree.morphLocked=true;
+          gsap.to('#globalMorphField',{opacity:0,duration:0.5,ease:'power2.inOut'});
+        },
+        onEnterBack:function(){
+          dotsWrap.style.opacity='1';
+          window._heroThree.morphLocked=false;
+          gsap.to('#globalMorphField',{opacity:1,duration:0.4,ease:'power2.out'});
+        },
+        onLeaveBack:function(){
+          dotsWrap.style.opacity='0';
+          window._heroThree.morphLocked=false;
+          window._heroThree.pageMorph=0;
+          gsap.to('#globalMorphField',{opacity:0,duration:0.35});
+        },
+        onUpdate:function(self){
+          window._heroThree.pageMorph=self.progress;
+          var prog=self.progress*panels.length;
+          var cur=Math.min(Math.floor(prog),panels.length-1);
+          var local=prog-cur;
+          dots.forEach(function(d,i){d.classList.toggle('on',i===cur);});
+          progs.forEach(function(b,i){
+            if(i<cur)b.style.width='100%';
+            else if(i===cur)b.style.width=(local*100)+'%';
+            else b.style.width='0%';
+          });
+        }
+      }
+    });
+
+    if(!reduceMotion){
+      gsap.fromTo('#globalMorphField',
+        {scale:1,yPercent:0},
+        {scale:1.06,yPercent:4,ease:'none',scrollTrigger:{trigger:'#hpW',start:'top top',end:hpEndStr,scrub:1.35}}
+      );
+    }
+  }else if(!reduceMotion){
+    ScrollTrigger.create({
+      trigger:'#mf',
+      start:'top bottom',
+      end:'bottom top',
+      scrub:0.75,
+      onUpdate:function(self){window._heroThree.pageMorph=self.progress;},
+      onLeave:function(){
+        window._heroThree.morphLocked=true;
+        gsap.to('#globalMorphField',{opacity:0,duration:0.5,ease:'power2.inOut'});
+      },
+      onEnterBack:function(){
+        window._heroThree.morphLocked=false;
+        gsap.to('#globalMorphField',{opacity:1,duration:0.4,ease:'power2.out'});
+      }
+    });
+    gsap.fromTo('#globalMorphField',
+      {scale:1,yPercent:0},
+      {scale:1.05,yPercent:3,ease:'none',scrollTrigger:{trigger:'#mf',start:'top bottom',end:'bottom top',scrub:1.2}}
+    );
+  }
+
+  /* manifesto word reveal — scrub-based */
+  gsap.to('.mword',{
+    color:'rgba(255,255,255,.88)',stagger:.045,duration:.6,ease:'none',
+    scrollTrigger:{
+      trigger:'#mf',start:'top 75%',end:'bottom 50%',scrub:.7,toggleActions:'play none none reverse'
+    }
+  });
+  gsap.to('.mword.em',{color:'rgba(61,212,112,.88)',stagger:.045,duration:.6,ease:'none',scrollTrigger:{trigger:'#mf',start:'top 75%',end:'bottom 50%',scrub:.7}});
+  gsap.to('.mword.bl',{color:'rgba(42,124,224,.9)',stagger:.045,duration:.6,ease:'none',scrollTrigger:{trigger:'#mf',start:'top 75%',end:'bottom 50%',scrub:.7}});
+
+  /* cards horizontal scroll */
+  if(window.innerWidth>900){
+    var crdsRow=document.getElementById('crdsRow');
+    var extraScroll=crdsRow.scrollWidth-window.innerWidth+window.innerWidth*.08;
+    gsap.to(crdsRow,{
+      x:-extraScroll,ease:'none',
+      scrollTrigger:{
+        trigger:'#crds',start:'top top',pin:true,scrub:1,anticipatePin:1,
+        end:'+='+(extraScroll+200)
+      }
+    });
+  }
+
+  /* section labels/titles fade up */
+  document.querySelectorAll('.slbl,.stit,.ssub').forEach(function(el){
+    gsap.set(el,{opacity:0,y:28});
+    gsap.to(el,{opacity:1,y:0,duration:.9,ease:'expo.out',scrollTrigger:{trigger:el,start:'top 90%',toggleActions:'play none none reverse'}});
+  });
+
+  /* approach cards — WQF-style clip-path wipe */
+  gsap.utils.toArray('.apc').forEach(function(card){
+    gsap.fromTo(card,
+      {clipPath:'inset(0 0 100% 0)',opacity:0.25,y:24},
+      {clipPath:'inset(0 0 0% 0)',opacity:1,y:0,duration:0.88,ease:'power3.out',
+        scrollTrigger:{trigger:card,start:'top 88%',toggleActions:'play none none reverse'}});
+  });
+
+  /* sectors */
+  gsap.from('.secp',{opacity:0,y:26,scale:.97,duration:.9,ease:'expo.out',stagger:{amount:.65,from:'random'},scrollTrigger:{trigger:'.secg',start:'top 86%',toggleActions:'play none none reverse'}});
+
+  /* cta rings */
+  ScrollTrigger.create({trigger:'#cta',start:'top 80%',onEnter:function(){
+    gsap.fromTo(['.cr1','.cr2','.cr3'],{scale:.4,opacity:0},{scale:1,opacity:1,stagger:.2,duration:1.4,ease:'expo.out'});
+  }});
+
+  /* testimonials */
+  gsap.from('.tiw',{opacity:0,y:40,duration:1.1,ease:'expo.out',scrollTrigger:{trigger:'#ti',start:'top 80%',toggleActions:'play none none reverse'}});
+  if(!reduceMotion){
+    gsap.from('.ft-brand',{opacity:0,y:22,scale:0.94,duration:1.12,ease:'expo.out',scrollTrigger:{trigger:'footer',start:'top 88%',once:true}});
+  }
+
+  /* footer */
+  gsap.from('.ftg > *',{opacity:0,y:36,stagger:.1,duration:1,ease:'expo.out',scrollTrigger:{trigger:'footer',start:'top 88%',toggleActions:'play none none reverse'}});
+
+  /* magnetic buttons */
+  document.querySelectorAll('.btnP,.btnCp,.ncta').forEach(function(btn){
+    btn.addEventListener('mousemove',function(e){
+      var r=btn.getBoundingClientRect();
+      gsap.to(btn,{x:(e.clientX-r.left-r.width/2)*.18,y:(e.clientY-r.top-r.height/2)*.18,duration:.4,ease:'power2.out'});
+    });
+    btn.addEventListener('mouseleave',function(){gsap.to(btn,{x:0,y:0,duration:.7,ease:'elastic.out(1,.5)'}); });
+  });
+
+  /* smooth anchor scroll — Lenis when available */
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var sel=a.getAttribute('href');
+      var t=sel&&sel.length>1?document.querySelector(sel):null;
+      if(t){
+        e.preventDefault();
+        navEl.classList.remove('nav-hide');
+        if(lenis)lenis.scrollTo(t,{offset:-72,duration:1.25,easing:function(x){return 1-Math.pow(1-x,3);}});
+        else gsap.to(window,{scrollTo:{y:t,offsetY:70},duration:1.2,ease:'expo.inOut'});
+      }
+    });
+  });
+
+  /* services panel */
+  var svRows=document.querySelectorAll('.svrow');
+  var svT=document.getElementById('svT'),svB=document.getElementById('svB'),svN=document.getElementById('svN');
+  svRows.forEach(function(row){
+    row.addEventListener('click',function(){
+      svRows.forEach(function(r){r.classList.remove('on');});
+      row.classList.add('on');
+      gsap.to([svT,svB],{opacity:0,y:6,duration:.2,onComplete:function(){
+        svT.textContent=row.dataset.title;svB.textContent=row.dataset.desc;svN.textContent=row.dataset.n;
+        gsap.to([svT,svB],{opacity:1,y:0,duration:.4,ease:'expo.out'});
+      }});
+    });
+  });
+
+  /* testimonials */
+  var tiData=[
+    {q:'Intensive Fiscal\'s expertise was <span class="tihl">pivotal to the success</span> of Bikaji\'s IPO — from regulatory filings to investor roadshows, their execution was absolutely flawless.',n:'Shivratan Agarwal',r:'Chairman, Bikaji Foods International'},
+    {q:'Their deep understanding of <span class="tihl">SEBI regulations and capital markets</span> made our open offer seamless. A truly professional team that delivers on every commitment.',n:'Senior Executive',r:'Listed Industrial Conglomerate, Mumbai'},
+    {q:'For over a decade, Intensive Fiscal has been our <span class="tihl">most trusted capital markets advisor</span> — for valuations, PE raises and debt syndication alike.',n:'Family Office Director',r:'Multi-Sector Business Group, Rajasthan'}
+  ];
+  var tiI=0;
+  var tiQ=document.getElementById('tiQ'),tiN=document.getElementById('tiN'),tiR=document.getElementById('tiR');
+  function showTi(i){
+    gsap.to(tiQ,{opacity:0,y:8,duration:.22,onComplete:function(){
+      tiQ.innerHTML=tiData[i].q;tiN.textContent=tiData[i].n;tiR.textContent=tiData[i].r;
+      gsap.to(tiQ,{opacity:1,y:0,duration:.45,ease:'expo.out'});
+    }});
+    document.querySelectorAll('.tidd').forEach(function(d,j){d.classList.toggle('on',j===i);});
+  }
+  document.querySelectorAll('.tidd').forEach(function(d){d.addEventListener('click',function(){tiI=+d.dataset.i;showTi(tiI);});});
+  setInterval(function(){tiI=(tiI+1)%tiData.length;showTi(tiI);},5500);
+
+  window.addEventListener('resize',function(){
+    if(lenis)lenis.resize();
+    ScrollTrigger.refresh();
+  });
+
+  /* refresh after fonts */
+  document.fonts.ready.then(function(){
+    if(lenis)lenis.resize();
+    ScrollTrigger.refresh();
+  });
+}
+</script>
+</body>
+</html>
