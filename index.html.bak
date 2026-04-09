@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Intensive Fiscal — SEBI Category-I Merchant Bankers</title>
+  <link rel="icon" href="favicon.png" type="image/png" />
+
+  <style>
+    @font-face {
+      font-family: 'Roc Grotesk';
+      src: url('roc-grotesk-regular.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Roc Grotesk';
+      src: url('roc-grotesk-medium.woff2') format('woff2');
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Azeret Mono';
+      src: url('azeret-mono-regular.otf') format('opentype');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+  </style>
+
+  <link rel="stylesheet" href="main.min.css" />
+
+  <style>
+    :root {
+      --easing: cubic-bezier(0.62, 0.16, 0.13, 1.01);
+      --header-height: 64px;
+    }
+
+    /* ── Section spacing ── */
+    .section-pad { padding: 120px 0; }
+    @media (min-width: 768px) { .section-pad { padding: 200px 0; } }
+
+    /* ── Stats bar ── */
+    .stat-bar {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      border-top: 1px solid rgba(231,231,231,0.15);
+      border-bottom: 1px solid rgba(231,231,231,0.15);
+    }
+    @media (min-width: 768px) {
+      .stat-bar { grid-template-columns: repeat(4, 1fr); }
+    }
+    .stat-item {
+      padding: 48px 40px;
+      border-right: 1px solid rgba(231,231,231,0.1);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-n { font-family: 'Roc Grotesk', sans-serif; font-size: clamp(40px,5vw,72px); font-weight: 400; line-height: 1; letter-spacing: -0.02em; }
+    .stat-l { font-family: 'Azeret Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(218,218,218,0.5); margin-top: 10px; }
+
+    /* ── Industry / service list ── */
+    .industry-li { border-top: 1px solid rgba(231,231,231,0.1); }
+    .industry-li:last-child { border-bottom: 1px solid rgba(231,231,231,0.1); }
+
+    /* ── Cards ── */
+    .card-stack { display: flex; flex-direction: column; gap: 20px; }
+    .card-item {
+      border-radius: 20px;
+      padding: 40px;
+      min-height: 300px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    @media (min-width: 768px) { .card-item { min-height: 420px; padding: 60px; } }
+
+    /* ── Marquee ── */
+    .mq-wrap { overflow: hidden; border-top: 1px solid rgba(231,231,231,0.1); border-bottom: 1px solid rgba(231,231,231,0.1); padding: 14px 0; }
+    .mq-track { display: flex; width: max-content; animation: mq 50s linear infinite; }
+    .mq-item { white-space: nowrap; padding: 0 40px; font-family: 'Azeret Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(218,218,218,0.4); display: flex; align-items: center; gap: 40px; }
+    .mq-dot { width: 4px; height: 4px; border-radius: 50%; background: #dadada; opacity: 0.3; flex-shrink: 0; }
+    @keyframes mq { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ── Word-reveal manifesto ── */
+    .mword { display: inline; color: rgba(218,218,218,0.12); transition: color 0.1s; }
+    .mword.lit { color: #e7e7e7; }
+
+    /* ── Corner accents ── */
+    .corner-accent { position: absolute; width: 9px; height: 9px; }
+    .corner-accent.tl { top: 0; left: 0; border-top: 1px solid currentColor; border-left: 1px solid currentColor; }
+    .corner-accent.tr { top: 0; right: 0; border-top: 1px solid currentColor; border-right: 1px solid currentColor; }
+    .corner-accent.bl { bottom: 0; left: 0; border-bottom: 1px solid currentColor; border-left: 1px solid currentColor; }
+    .corner-accent.br { bottom: 0; right: 0; border-bottom: 1px solid currentColor; border-right: 1px solid currentColor; }
+
+    /* ── Custom cursor ── */
+    #wqf-cursor {
+      position: fixed; top: 0; left: 0; z-index: 1000; pointer-events: none;
+      width: 32px; height: 32px;
+      background: #dadada; color: #111;
+      border-radius: 100px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Azeret Mono', monospace; font-size: 9px; letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      transition: opacity 0.3s, width 0.4s var(--easing), height 0.4s var(--easing);
+      overflow: hidden;
+    }
+
+    /* ── Loader ── */
+    .loader {
+      position: fixed; inset: 0; z-index: 5000;
+      background: #111;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+    }
+    .loader--logo { position: relative; width: 180px; }
+    @media (min-width: 768px) { .loader--logo { width: 260px; } }
+    .loader--logo img { width: 100%; height: auto; display: block; filter: brightness(0) invert(1); }
+    .loader--pct {
+      position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+      font-family: 'Azeret Mono', monospace; font-size: 11px; letter-spacing: 0.2em;
+      color: rgba(218,218,218,0.5); font-variant-numeric: tabular-nums;
+    }
+
+    /* ── Smooth scroll ── */
+    html { overflow: hidden; }
+    body { overflow: hidden; }
+    #smooth-wrapper { overflow: hidden; height: 100vh; }
+    #smooth-content { will-change: transform; }
+
+    /* ── Logo image ── */
+    .logo-img-h {
+      height: 28px;
+      width: auto;
+      display: block;
+      filter: brightness(0) invert(1);
+      transition: opacity 0.4s var(--easing);
+    }
+    .logo-img-v {
+      position: absolute;
+      top: 0; left: 0;
+      height: 28px;
+      width: auto;
+      display: block;
+      filter: brightness(0) invert(1);
+      transform: translateY(100%);
+      transition: transform 0.6s var(--easing), opacity 0.4s var(--easing);
+    }
+
+    /* ── Hero tagline badge ── */
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Azeret Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(218,218,218,0.6);
+      border: 1px solid rgba(218,218,218,0.15);
+      border-radius: 100px;
+      padding: 6px 14px;
+      margin-bottom: 24px;
+    }
+    .hero-badge-dot {
+      width: 5px; height: 5px;
+      background: #dadada;
+      border-radius: 50%;
+      opacity: 0.5;
+    }
+
+    /* ── Manifesto section ── */
+    .manifesto-text {
+      font-family: 'Roc Grotesk', sans-serif;
+      font-size: clamp(22px, 3vw, 42px);
+      font-weight: 400;
+      line-height: 1.5;
+      letter-spacing: -0.01em;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* ── Deals / clients strip ── */
+    .deals-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: rgba(231,231,231,0.1);
+      border: 1px solid rgba(231,231,231,0.1);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    @media (min-width: 768px) { .deals-grid { grid-template-columns: repeat(6, 1fr); } }
+    .deal-cell {
+      background: rgba(17,17,17,0.8);
+      padding: 32px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      text-align: center;
+    }
+    .deal-cell-name {
+      font-family: 'Azeret Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(218,218,218,0.4);
+    }
+    .deal-cell-sector {
+      font-family: 'Roc Grotesk', sans-serif;
+      font-size: 13px;
+      color: rgba(218,218,218,0.7);
+    }
+
+    /* ── Sectors grid ── */
+    .sectors-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: rgba(231,231,231,0.08);
+    }
+    @media (min-width: 768px) { .sectors-grid { grid-template-columns: repeat(4, 1fr); } }
+    .sector-cell {
+      background: #111;
+      padding: 36px 32px;
+      border-left: 2px solid transparent;
+      transition: border-color 0.3s, background 0.3s;
+      cursor: default;
+    }
+    .sector-cell:hover {
+      border-left-color: rgba(218,218,218,0.4);
+      background: rgba(218,218,218,0.04);
+    }
+    .sector-num {
+      font-family: 'Azeret Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      color: rgba(218,218,218,0.3);
+      margin-bottom: 12px;
+    }
+    .sector-name {
+      font-family: 'Roc Grotesk', sans-serif;
+      font-size: 15px;
+      color: rgba(218,218,218,0.8);
+      line-height: 1.3;
+    }
+
+    /* ── Approach steps ── */
+    .approach-step {
+      display: grid;
+      grid-template-columns: 60px 1fr;
+      gap: 24px;
+      padding: 40px 0;
+      border-top: 1px solid rgba(231,231,231,0.1);
+      align-items: start;
+    }
+    .approach-step:last-child { border-bottom: 1px solid rgba(231,231,231,0.1); }
+    .approach-num {
+      font-family: 'Azeret Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      color: rgba(218,218,218,0.3);
+      padding-top: 4px;
+    }
+
+    /* ── Testimonial ── */
+    .testimonial-quote {
+      font-family: 'Roc Grotesk', sans-serif;
+      font-size: clamp(18px, 2.5vw, 32px);
+      font-weight: 400;
+      line-height: 1.5;
+      color: #e7e7e7;
+      max-width: 820px;
+    }
+
+    /* ── Neural-fog text for dark-bg sections ── */
+    .text-carbon { color: #111; }
+
+    /* ── Ethos cards hover expand (adapted) ── */
+    .ethos-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    @media (min-width: 768px) {
+      .ethos-cards { flex-direction: row; }
+    }
+    .ethos-card {
+      flex: 1;
+      border-radius: 20px;
+      padding: 40px 32px;
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: flex 0.5s var(--easing);
+    }
+    @media (min-width: 768px) {
+      .ethos-cards:hover .ethos-card { flex: 0.6; }
+      .ethos-cards:hover .ethos-card:hover { flex: 1.8; }
+    }
+    .ethos-card-num {
+      font-family: 'Azeret Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      opacity: 0.5;
+    }
+
+    /* ── Footer canonical ── */
+    footer { position: relative; }
+
+    /* scrollbar */
+    ::-webkit-scrollbar { width: 2px; }
+    ::-webkit-scrollbar-thumb { background: rgba(218,218,218,0.3); }
+  </style>
+
+  <script src="three.min.js" defer></script>
+  <script src="swiper.min.js" defer></script>
+  <script src="gsap.min.js" defer></script>
+  <script src="main.min.js" defer></script>
+</head>
+
+<body class="bg-rich-carbon text-neural-fog font-roc-grotesk">
+
+  <!-- CUSTOM CURSOR -->
+  <div id="wqf-cursor"></div>
+
+  <!-- LOADER -->
+  <div class="loader" id="loader">
+    <div class="loader--logo">
+      <img src="logo.png" alt="Intensive Fiscal" />
+    </div>
+    <span class="loader--pct" id="loader-pct">0%</span>
+  </div>
+
+  <div id="smooth-wrapper">
+    <div id="smooth-content">
+
+      <!-- ══════════════════════════════════════════════════════
+           HEADER
+      ══════════════════════════════════════════════════════ -->
+      <header id="site-header" class="layout--header group fixed top-0 isolate z-50 flex w-full items-center transition-transform duration-400 lg:h-(--header-height) lg:overflow-hidden">
+        <div class="flex w-full lg:container">
+          <div class="header-inner relative isolate mx-auto flex h-(--header-height) w-fit grow items-center justify-between gap-[20px] bg-transparent px-[10px] transition-all duration-600 ease-(--easing) lg:h-auto lg:px-0" id="header-bar">
+            <!-- Logo -->
+            <a href="#" class="relative isolate h-[30px] overflow-hidden transition-[width] duration-600 ease-(--easing)" id="header-logo" style="width:220px">
+              <img id="logo-h" class="logo-img-h" src="logo.png" alt="Intensive Fiscal" />
+              <img id="logo-v" class="logo-img-v" src="logo.png" alt="Intensive Fiscal" style="height:26px;" />
+            </a>
+
+            <!-- Desktop nav -->
+            <nav class="hidden lg:flex items-center">
+              <ul class="flex items-center">
+                <li><a href="#services" class="group/link relative isolate"><div class="flex h-[40px] items-center px-[20px]"><div class="p2-mono relative isolate flex overflow-hidden"><span class="transition-transform duration-400 ease-(--easing) group-hover/link:-translate-y-full">SERVICES</span><span class="absolute inset-0 translate-y-full transition-transform duration-400 ease-(--easing) group-hover/link:translate-y-0" aria-hidden="true">SERVICES</span></div></div></a></li>
+                <li><a href="#sectors" class="group/link relative isolate"><div class="flex h-[40px] items-center px-[20px]"><div class="p2-mono relative isolate flex overflow-hidden"><span class="transition-transform duration-400 ease-(--easing) group-hover/link:-translate-y-full">SECTORS</span><span class="absolute inset-0 translate-y-full transition-transform duration-400 ease-(--easing) group-hover/link:translate-y-0" aria-hidden="true">SECTORS</span></div></div></a></li>
+                <li><a href="#approach" class="group/link relative isolate"><div class="flex h-[40px] items-center px-[20px]"><div class="p2-mono relative isolate flex overflow-hidden"><span class="transition-transform duration-400 ease-(--easing) group-hover/link:-translate-y-full">APPROACH</span><span class="absolute inset-0 translate-y-full transition-transform duration-400 ease-(--easing) group-hover/link:translate-y-0" aria-hidden="true">APPROACH</span></div></div></a></li>
+                <li><a href="#clients" class="group/link relative isolate"><div class="flex h-[40px] items-center px-[20px]"><div class="p2-mono relative isolate flex overflow-hidden"><span class="transition-transform duration-400 ease-(--easing) group-hover/link:-translate-y-full">CLIENTS</span><span class="absolute inset-0 translate-y-full transition-transform duration-400 ease-(--easing) group-hover/link:translate-y-0" aria-hidden="true">CLIENTS</span></div></div></a></li>
+                <li>
+                  <a href="#contact" class="group/button hover:animate-glitch-hover relative isolate ml-[8px]" data-theme="light">
+                    <div class="flex h-[40px] items-center justify-center px-[20px]">
+                      <div class="group-data-[theme=light]/button:bg-neural-fog size-[10px] -translate-x-[24px] rounded-[3px] opacity-0 blur-[20px] transition-all duration-400 ease-(--easing) group-hover/button:-translate-x-[5px] group-hover/button:opacity-100 group-hover/button:blur-[0px]"></div>
+                      <div class="p2-mono group-data-[theme=light]/button:text-neural-fog relative isolate flex -translate-x-[5px] overflow-hidden transition-transform duration-400 ease-(--easing) group-hover/button:translate-x-[5px]">
+                        <span class="transition-transform duration-400 ease-(--easing) group-hover/button:-translate-y-full">Contact</span>
+                        <span class="absolute inset-0 translate-y-full transition-transform duration-400 ease-(--easing) group-hover/button:translate-y-0" aria-hidden="true">Contact</span>
+                      </div>
+                    </div>
+                    <svg class="size-[9px] corner-accent tl" viewBox="0 0 10 10" fill="none"><path d="M0.5 0.2L0.5 9.2M0.2 0.5L9.2 0.5" stroke="currentColor"/></svg>
+                    <svg class="size-[9px] corner-accent tr" viewBox="0 0 10 10" fill="none"><path d="M0.5 0.2L0.5 9.2M0.2 0.5L9.2 0.5" stroke="currentColor"/></svg>
+                    <svg class="size-[9px] corner-accent bl" viewBox="0 0 10 10" fill="none"><path d="M0.5 0.2L0.5 9.2M0.2 0.5L9.2 0.5" stroke="currentColor"/></svg>
+                    <svg class="size-[9px] corner-accent br" viewBox="0 0 10 10" fill="none"><path d="M0.5 0.2L0.5 9.2M0.2 0.5L9.2 0.5" stroke="currentColor"/></svg>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+
+            <!-- Mobile hamburger -->
+            <button class="relative isolate flex size-[40px] items-center justify-center lg:hidden" id="mob-toggle" aria-label="Toggle menu">
+              <div class="bg-neural-fog size-[10px] rounded-[3px]"></div>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- Mobile Menu -->
+      <div id="mob-menu" class="bg-rich-carbon/95 fixed inset-0 z-40 flex flex-col items-center justify-center backdrop-blur-[10px] lg:hidden" style="display:none; clip-path:inset(0 0 100% 0); transition: clip-path 0.4s var(--easing);">
+        <ul class="flex flex-col items-center gap-[32px] text-center">
+          <li><a href="#services" class="h3 uppercase" onclick="closeMob()">Services</a></li>
+          <li><a href="#sectors" class="h3 uppercase" onclick="closeMob()">Sectors</a></li>
+          <li><a href="#approach" class="h3 uppercase" onclick="closeMob()">Approach</a></li>
+          <li><a href="#clients" class="h3 uppercase" onclick="closeMob()">Clients</a></li>
+          <li><a href="#contact" class="h3 uppercase" onclick="closeMob()">Contact</a></li>
+        </ul>
+      </div>
+
+      <main id="main" tabindex="-1">
+
+        <!-- ══════════════════════════════════════════════════════
+             HERO — WebGL particle canvas
+        ══════════════════════════════════════════════════════ -->
+        <section class="relative overflow-hidden" id="hero-section" x-data="homeHero">
+          <div class="container">
+            <div class="flex h-dvh min-h-[550px] flex-col justify-between gap-[40px]">
+              <div class="hidden grow basis-0 md:block"></div>
+              <div class="relative isolate flex w-full grow justify-center pt-(--header-height) max-md:items-center md:grow-0 md:pt-0" x-ref="container">
+                <div class="text-center">
+                  <div class="hero-badge mb-[20px]">
+                    <span class="hero-badge-dot"></span>
+                    SEBI Category-I Merchant Banker · Est. 1997
+                  </div>
+                  <h1 class="h2 max-w-[860px] leading-none uppercase">
+                    <span class="hero-title--left">India's</span>
+                    <span class="hero-title--left">Most</span>
+                    <br/>
+                    <span class="hero-title--right mt-[64px] md:mt-0">Trusted</span>
+                    <br/>
+                    <span class="hero-title--right">Capital</span>
+                    <span class="hero-title--right">Partner</span>
+                  </h1>
+                </div>
+              </div>
+              <div class="p3-mono text-off-white/60 mt-auto flex flex-col justify-end gap-[6px] pb-[24px] md:mt-0 md:grow md:basis-0 md:pb-[30px]" x-ref="bottom_content">
+                <div class="border-off-white/20 flex w-full flex-col-reverse gap-[24px] border-t pt-[20px] md:flex-row">
+                  <div class="flex items-center justify-between md:w-[30%] xl:w-[50%]">
+                    <button class="group/button hover:animate-glitch-hover relative isolate" data-theme="light" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+                      <div class="flex h-[40px] items-center justify-center px-[20px]">
+                        <div class="group-data-[theme=light]/button:bg-neural-fog size-[10px] -translate-x-[24px] rounded-[3px] opacity-0 blur-[20px] transition-all duration-400 ease-(--easing) group-hover/button:-translate-x-[5px] group-hover/button:opacity-100 group-hover/button:blur-[0px]"></div>
+                        <div class="p2-mono group-data-[theme=light]/button:text-neural-fog relative isolate flex -translate-x-[5px] overflow-hidden transition-transform duration-400 ease-(--easing) group-hover/button:translate-x-[5px]">
+                          <span class="transition-transform duration-400 ease-(--easing) group-hover/button:-translate-y-full">Book a Consultation</span>
+                          <span class="absolute inset-0 translate-y-full transition-transform duration-400 ease-(--easing) group-hover/button:translate-y-0" aria-hidden="true">Book a Consultation</span>
+                        </div>
+                      </div>
+                      <svg class="size-[9px] corner-accent tl" viewBox="0 0 10 10" fill="none"><path d="M0.5 0.2L0.5 9.2M0.2 0.5L9.2 0.5" stroke="currentColor"/></svg>
+                      <svg class="size-[9px] corner-accent tr" viewBox="0 0 10 10" fill="none"><path d="M0.5 0.2L0.5 9.2M0.2 0.5L9.2 0.5" stroke="currentColor"/></svg>
+                      <svg class="size-[9px] corner-accent bl" viewBox="0 0 10 10" fill="none"><path d="M0.5 0.2L0.5 9.2M0.2 0.5L9.2 0.5" stroke="currentColor"/></svg>
+                      <svg class="size-[9px] corner-accent br" viewBox="0 0 10 10" fill="none"><path d="M0.5 0.2L0.5 9.2M0.2 0.5L9.2 0.5" stroke="currentColor"/></svg>
+                    </button>
+                  </div>
+                  <div class="flex shrink-0 items-start justify-between md:w-[70%] xl:w-[50%]">
+                    <p>Intensive Fiscal is a SEBI Category-I Merchant Banking firm. From landmark IPOs and private equity placements to complex debt structures and M&amp;A advisory — we architect capital strategies that transform India's most ambitious businesses.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- WebGL particle canvas (homeHero Alpine component) -->
+          <canvas class="absolute inset-0 -z-1 h-full w-full" x-ref="canvas"></canvas>
+        </section>
+
+        <!-- ══════════════════════════════════════════════════════
+             STATS BAR
+        ══════════════════════════════════════════════════════ -->
+        <div class="stat-bar" id="stats-bar">
+          <div class="stat-item">
+            <p class="stat-l">Corporate Groups</p>
+            <p class="stat-n">300<span style="font-size:0.45em;vertical-align:super">+</span></p>
+          </div>
+          <div class="stat-item">
+            <p class="stat-l">Years of Expertise</p>
+            <p class="stat-n">27</p>
+          </div>
+          <div class="stat-item">
+            <p class="stat-l">Client Retention</p>
+            <p class="stat-n">100<span style="font-size:0.45em;vertical-align:super">%</span></p>
+          </div>
+          <div class="stat-item">
+            <p class="stat-l">Cities Covered</p>
+            <p class="stat-n">50<span style="font-size:0.45em;vertical-align:super">+</span></p>
+          </div>
+        </div>
+
+        <!-- ══════════════════════════════════════════════════════
+             MARQUEE
+        ══════════════════════════════════════════════════════ -->
+        <div class="mq-wrap">
+          <div class="mq-track">
+            <div class="mq-item">Intensive Fiscal<span class="mq-dot"></span>IPO Advisory<span class="mq-dot"></span>Private Equity<span class="mq-dot"></span>Debt Syndication<span class="mq-dot"></span>Open Offer / Takeover<span class="mq-dot"></span>ESOP Valuation<span class="mq-dot"></span>Merchant Banking<span class="mq-dot"></span>Project Finance<span class="mq-dot"></span>Structured Finance<span class="mq-dot"></span>Rights Issue<span class="mq-dot"></span></div>
+            <div class="mq-item" aria-hidden="true">Intensive Fiscal<span class="mq-dot"></span>IPO Advisory<span class="mq-dot"></span>Private Equity<span class="mq-dot"></span>Debt Syndication<span class="mq-dot"></span>Open Offer / Takeover<span class="mq-dot"></span>ESOP Valuation<span class="mq-dot"></span>Merchant Banking<span class="mq-dot"></span>Project Finance<span class="mq-dot"></span>Structured Finance<span class="mq-dot"></span>Rights Issue<span class="mq-dot"></span></div>
+          </div>
+        </div>
+
+        <!-- ══════════════════════════════════════════════════════
+             MANDATE SECTION (light bg, animated clip-path reveal)
+        ══════════════════════════════════════════════════════ -->
+        <section
+          id="services"
+          class="bg-neural-fog text-rich-carbon overflow-hidden rounded-t-[20px] pt-[120px] pb-[200px] md:py-[220px]"
+          x-data="{
+            init() {
+              const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+              if (prefersReducedMotion) return;
+              const tl = gsap.timeline({ scrollTrigger: { trigger: this.$el, start: 'top bottom-=10%', end: 'top center', scrub: 1 } });
+              tl.from(this.$el, { css: { clipPath: 'inset(0 100% 0 0)' }, duration: 1.2 })
+            }
+          }"
+        >
+          <div class="container">
+            <div class="mb-[40px] grid grid-cols-1 gap-x-[24px] gap-y-[24px] md:mb-[60px] md:grid-cols-2">
+              <div class="flex flex-col gap-[12px]">
+                <h2 class="p2-mono">Our Mandate</h2>
+                <p class="h5 uppercase">Regulatory depth.<br/>Capital precision.</p>
+              </div>
+              <div class="flex flex-col items-start">
+                <p class="p1 border-rich-carbon/20 mb-[24px] border-t pt-[20px] md:mb-[32px]">
+                  As SEBI Category-I Merchant Bankers since 1997, we operate at the intersection of regulation, capital, and execution — the layer where transactions succeed or fail. Our advisory platform gives Indian founders and companies the strategic infrastructure to close deals that define their future.
+                </p>
+                <button class="group/button hover:animate-glitch-hover relative isolate" data-theme="dark" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+                  <div class="flex h-[40px] items-center justify-center px-[20px]">
+                    <div class="group-data-[theme=dark]/button:bg-rich-carbon size-[10px] -translate-x-[24px] rounded-[3px] opacity-0 blur-[20px] transition-all duration-400 ease-(--easing) group-hover/button:-translate-x-[5px] group-hover/button:opacity-100 group-hover/button:blur-[0px]"></div>
+                    <div class="p2-mono group-data-[theme=dark]/button:text-rich-carbon relative isolate flex -translate-x-[5px] overflow-hidden transition-transform duration-400 ease-(--easing) group-hover/button:translate-x-[5px]">
+                      <span class="transition-transform duration-400 ease-(--easing) group-hover/button:-translate-y-full">Start a Conversation</span>
+                      <span class="absolute inset-0 translate-y-full transition-transform duration-400 ease-(--easing) group-hover/button:translate-y-0" aria-hidden="true">Start a Conversation</span>
+                    </div>
+                  </div>
+                  <svg class="size-[9px] corner-accent tl" viewBox="0 0 10 10" fill="none"><path d="M0.5 0.2L0.5 9.2M0.2 0.5L9.2 0.5" stroke="currentColor"/></svg>
+                  <svg class="size-[9px] corner-accent tr" viewBox="0 0 10 10" fill="none"><path d="M0.5 0.2L0.5 9.2M0.2 0.5L9.2 0.5" stroke="currentColor"/></svg>
+                  <svg class="size-[9px] corner-accent bl" viewBox="0 0 10 10" fill="none"><path d="M0.5 0.2L0.5 9.2M0.2 0.5L9.2 0.5" stroke="currentColor"/></svg>
+                  <svg class="size-[9px] corner-accent br" viewBox="0 0 10 10" fill="none"><path d="M0.5 0.2L0.5 9.2M0.2 0.5L9.2 0.5" stroke="currentColor"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Service cards (hover-expand) -->
+            <ul
+              class="group flex flex-col gap-[20px] md:flex-row md:gap-0"
+              x-data="{
+                activeCard: null,
+                init() {
+                  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                  if (prefersReducedMotion) return;
+                  const mm = gsap.matchMedia();
+                  mm.add('(max-width: 767px)', () => {
+                    const cards = gsap.utils.toArray(this.$el.querySelectorAll('li'));
+                    cards.forEach(card => {
+                      gsap.from(card, { scrollTrigger: { trigger: card, start: 'top 50%', end: 'bottom bottom' }, clipPath: 'inset(0 0 100% 0)', duration: 0.6, ease: 'power3.inOut' });
+                    });
+                  });
+                }
+              }"
+            >
+              <li class="group/card w-full shrink-0 transition-[width] delay-100 duration-500 ease-(--easing) md:w-[25%] md:group-has-[li.-active]:w-[20%]"
+                  :class="{ '-active md:w-[40%]!': activeCard === 1 }"
+                  @mouseenter="activeCard = 1" @mouseleave="activeCard = null">
+                <div class="relative h-full w-full overflow-hidden rounded-[20px] transition-all delay-100 duration-500 ease-(--easing) md:w-[125%] md:group-[.-active]/card:w-full bg-rich-carbon text-neural-fog">
+                  <div class="flex size-full justify-center pt-[40px] pb-[20px] md:py-[40px]">
+                    <div class="flex w-full flex-col items-center gap-[22px] px-[20px] text-center md:max-w-[300px] md:shrink-0 md:gap-[44px]">
+                      <h3 class="h4 md:h5 mx-auto max-w-[290px] uppercase">IPO & SME IPO</h3>
+                      <div class="p2-mono flex flex-col gap-[15px]">
+                        <p>01 / 06</p>
+                        <p class="text-pretty">End-to-end management from DRHP and SEBI filings to investor roadshows and post-listing compliance.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="group/card w-full shrink-0 transition-[width] delay-100 duration-500 ease-(--easing) md:w-[25%] md:group-has-[li.-active]:w-[20%]"
+                  :class="{ '-active md:w-[40%]!': activeCard === 2 }"
+                  @mouseenter="activeCard = 2" @mouseleave="activeCard = null">
+                <div class="relative h-full w-full overflow-hidden rounded-[20px] transition-all delay-100 duration-500 ease-(--easing) md:w-[125%] md:group-[.-active]/card:w-full bg-electric-teal text-rich-carbon">
+                  <div class="flex size-full justify-center pt-[40px] pb-[20px] md:py-[40px]">
+                    <div class="flex w-full flex-col items-center gap-[22px] px-[20px] text-center md:max-w-[300px] md:shrink-0 md:gap-[44px]">
+                      <h3 class="h4 md:h5 mx-auto max-w-[290px] uppercase">Private Equity</h3>
+                      <div class="p2-mono flex flex-col gap-[15px]">
+                        <p>02 / 06</p>
+                        <p class="text-pretty">Strategic PE syndication connecting growth businesses with PE funds, family offices, and HNI investors.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="group/card w-full shrink-0 transition-[width] delay-100 duration-500 ease-(--easing) md:w-[25%] md:group-has-[li.-active]:w-[20%]"
+                  :class="{ '-active md:w-[40%]!': activeCard === 3 }"
+                  @mouseenter="activeCard = 3" @mouseleave="activeCard = null">
+                <div class="relative h-full w-full overflow-hidden rounded-[20px] transition-all delay-100 duration-500 ease-(--easing) md:w-[125%] md:group-[.-active]/card:w-full bg-infrared text-rich-carbon">
+                  <div class="flex size-full justify-center pt-[40px] pb-[20px] md:py-[40px]">
+                    <div class="flex w-full flex-col items-center gap-[22px] px-[20px] text-center md:max-w-[300px] md:shrink-0 md:gap-[44px]">
+                      <h3 class="h4 md:h5 mx-auto max-w-[290px] uppercase">Debt Syndication</h3>
+                      <div class="p2-mono flex flex-col gap-[15px]">
+                        <p>03 / 06</p>
+                        <p class="text-pretty">Structured finance, project finance, mezzanine, and acquisition financing engineered for growth.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="group/card w-full shrink-0 transition-[width] delay-100 duration-500 ease-(--easing) md:w-[25%] md:group-has-[li.-active]:w-[20%]"
+                  :class="{ '-active md:w-[40%]!': activeCard === 4 }"
+                  @mouseenter="activeCard = 4" @mouseleave="activeCard = null">
+                <div class="relative h-full w-full overflow-hidden rounded-[20px] transition-all delay-100 duration-500 ease-(--easing) md:w-[125%] md:group-[.-active]/card:w-full bg-off-white text-rich-carbon">
+                  <div class="flex size-full justify-center pt-[40px] pb-[20px] md:py-[40px]">
+                    <div class="flex w-full flex-col items-center gap-[22px] px-[20px] text-center md:max-w-[300px] md:shrink-0 md:gap-[44px]">
+                      <h3 class="h4 md:h5 mx-auto max-w-[290px] uppercase">M&A & Takeovers</h3>
+                      <div class="p2-mono flex flex-col gap-[15px]">
+                        <p>04 / 06</p>
+                        <p class="text-pretty">Expert open offer and takeover management under SEBI SAST Regulations. Precision at every step.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+
+            <!-- Additional services list -->
+            <div class="mt-[40px]">
+              <div class="industry-li py-[20px] flex items-center justify-between">
+                <span class="p2-mono text-rich-carbon/60">05 / 06</span>
+                <span class="h6 uppercase">ESOP & Valuations</span>
+                <span class="p2 text-rich-carbon/60 max-w-[300px] text-right hidden md:block">SEBI-recognized valuation certificates, fairness opinions, and regulatory compliance.</span>
+              </div>
+              <div class="industry-li py-[20px] flex items-center justify-between">
+                <span class="p2-mono text-rich-carbon/60">06 / 06</span>
+                <span class="h6 uppercase">Rights Issue & QIP</span>
+                <span class="p2 text-rich-carbon/60 max-w-[300px] text-right hidden md:block">Full documentation, SEBI filings, and investor management for listed entities.</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ══════════════════════════════════════════════════════
+             FOCUS INDUSTRIES — particle canvas + list
+        ══════════════════════════════════════════════════════ -->
+        <div class="bg-neural-fog text-rich-carbon">
+          <div id="focus-industries" class="relative isolate -mt-[2px] overflow-hidden">
+            <!-- WQF particle canvas background -->
+            <div class="absolute inset-0 -z-1 size-full" x-data="focusIndustries">
+              <canvas x-ref="canvas" class="size-full" style="mask-image:linear-gradient(0deg,transparent 0%,black 20%,black 80%,transparent 100%);-webkit-mask-image:linear-gradient(0deg,transparent 0%,black 20%,black 80%,transparent 100%);"></canvas>
+            </div>
+
+            <!-- Pinned gradient overlay -->
+            <div class="from-neural-fog to-neural-fog pointer-events-none absolute inset-0 z-1 hidden h-screen w-full bg-linear-to-b via-transparent md:block"
+              x-data="{ init() { const mm = gsap.matchMedia(); mm.add('(min-width: 768px)', () => { ScrollTrigger.create({ trigger: '#focus-industries', start: 'top top', end: 'bottom top', pin: this.$el, pinSpacing: false, invalidateOnRefresh: true }); }); } }">
+            </div>
+
+            <!-- Focus heading -->
+            <section id="sectors" class="flex h-dvh items-center overflow-hidden"
+              x-data="{ init() { this.$nextTick(() => { const tl = gsap.timeline({ scrollTrigger: { trigger: this.$el, start: 'top 50%' } }); tl.from([this.$refs.preheading, this.$refs.heading, this.$refs.description], { opacity: 0, y: 64, ease: 'power4.inOut', duration: 1.2 }); }); } }">
+              <div class="container text-center">
+                <div class="mx-auto flex max-w-[895px] flex-col items-center gap-[30px]">
+                  <div class="flex flex-col gap-[12px]">
+                    <h2 class="p1-mono" x-ref="preheading">Our Coverage</h2>
+                    <h3 class="h2 uppercase" x-ref="heading">Deep domain expertise.<br/>India's most dynamic sectors.</h3>
+                  </div>
+                  <p class="p3 md:p1 max-w-[305px] md:max-w-[550px]" x-ref="description">Specialized transaction intelligence across the industries shaping modern India — from marquee IPOs to complex cross-border structures.</p>
+                </div>
+              </div>
+            </section>
+
+            <!-- Industries list (hover pattern) -->
+            <section class="-mt-px min-h-dvh py-[40px] md:py-[100px]"
+              x-data="{ init() { gsap.from(this.$refs.content, { opacity: 0, y: 80, duration: 1.2, ease: 'power4.inOut', scrollTrigger: { trigger: this.$el, start: 'top 60%' } }); } }">
+              <div class="relative container" x-ref="content"
+                x-data="{
+                  links: [], activeLink: null, isMobile: false,
+                  setActive(index) { this.activeLink = index - 1; },
+                  handleHover(index) { if (!this.isMobile) this.setActive(index); },
+                  handleClick(index) { this.activeLink === index - 1 ? this.clearActive() : this.setActive(index); },
+                  clearActive() { this.activeLink = null; },
+                  handleMouseLeave() { if (!this.isMobile) this.clearActive(); },
+                  checkMobile() { this.isMobile = window.innerWidth < 768; },
+                  init() {
+                    this.$nextTick(() => { this.links = this.$refs.list.querySelectorAll('li'); });
+                    this.checkMobile();
+                    if (this.isMobile) this.setActive(1);
+                  }
+                }"
+                @resize.window="checkMobile(); isMobile ? setActive(1) : clearActive()">
+                <ul class="relative isolate flex flex-col items-center text-center" x-ref="list">
+                  <li class="group grid grid-rows-[auto_0fr] px-[40px] py-[10px] text-center transition-[grid-template-rows,padding] duration-500 ease-(--easing) data-active:grid-rows-[auto_1fr] data-active:py-[60px] md:py-0" :data-active="activeLink === 0" @mouseenter="handleHover(1)" @mouseleave="handleMouseLeave()">
+                    <button class="relative isolate w-full overflow-hidden md:cursor-default" @click="handleClick(1)">
+                      <h3 class="h4 uppercase transition-transform duration-500 ease-(--easing) group-data-active:-translate-y-full">Real Estate & Infrastructure</h3>
+                      <span aria-hidden="true" class="h4 absolute inset-0 translate-y-full uppercase transition-transform duration-500 ease-(--easing) group-data-active:translate-y-0">Real Estate & Infrastructure</span>
+                    </button>
+                    <div class="flex justify-center overflow-hidden"><p class="p2 max-w-[430px] pt-[4px]">Project finance, structured debt, and equity placements for India's infrastructure builders.</p></div>
+                  </li>
+                  <li class="group grid grid-rows-[auto_0fr] px-[40px] py-[10px] text-center transition-[grid-template-rows,padding] duration-500 ease-(--easing) data-active:grid-rows-[auto_1fr] data-active:py-[60px] md:py-0" :data-active="activeLink === 1" @mouseenter="handleHover(2)" @mouseleave="handleMouseLeave()">
+                    <button class="relative isolate w-full overflow-hidden md:cursor-default" @click="handleClick(2)">
+                      <h3 class="h4 uppercase transition-transform duration-500 ease-(--easing) group-data-active:-translate-y-full">Pharmaceuticals & Healthcare</h3>
+                      <span aria-hidden="true" class="h4 absolute inset-0 translate-y-full uppercase transition-transform duration-500 ease-(--easing) group-data-active:translate-y-0">Pharmaceuticals & Healthcare</span>
+                    </button>
+                    <div class="flex justify-center overflow-hidden"><p class="p2 max-w-[430px] pt-[4px]">IPO management, PE syndication, and M&A advisory for pharma and healthcare companies.</p></div>
+                  </li>
+                  <li class="group grid grid-rows-[auto_0fr] px-[40px] py-[10px] text-center transition-[grid-template-rows,padding] duration-500 ease-(--easing) data-active:grid-rows-[auto_1fr] data-active:py-[60px] md:py-0" :data-active="activeLink === 2" @mouseenter="handleHover(3)" @mouseleave="handleMouseLeave()">
+                    <button class="relative isolate w-full overflow-hidden md:cursor-default" @click="handleClick(3)">
+                      <h3 class="h4 uppercase transition-transform duration-500 ease-(--easing) group-data-active:-translate-y-full">FMCG & Consumer Brands</h3>
+                      <span aria-hidden="true" class="h4 absolute inset-0 translate-y-full uppercase transition-transform duration-500 ease-(--easing) group-data-active:translate-y-0">FMCG & Consumer Brands</span>
+                    </button>
+                    <div class="flex justify-center overflow-hidden"><p class="p2 max-w-[430px] pt-[4px]">Capital raising and strategic advisory for India's fastest-growing consumer brands — including Bikaji Foods.</p></div>
+                  </li>
+                  <li class="group grid grid-rows-[auto_0fr] px-[40px] py-[10px] text-center transition-[grid-template-rows,padding] duration-500 ease-(--easing) data-active:grid-rows-[auto_1fr] data-active:py-[60px] md:py-0" :data-active="activeLink === 3" @mouseenter="handleHover(4)" @mouseleave="handleMouseLeave()">
+                    <button class="relative isolate w-full overflow-hidden md:cursor-default" @click="handleClick(4)">
+                      <h3 class="h4 uppercase transition-transform duration-500 ease-(--easing) group-data-active:-translate-y-full">IT, E-Commerce & Fintech</h3>
+                      <span aria-hidden="true" class="h4 absolute inset-0 translate-y-full uppercase transition-transform duration-500 ease-(--easing) group-data-active:translate-y-0">IT, E-Commerce & Fintech</span>
+                    </button>
+                    <div class="flex justify-center overflow-hidden"><p class="p2 max-w-[430px] pt-[4px]">Growth-stage to pre-IPO advisory for technology companies navigating India's digital economy.</p></div>
+                  </li>
+                  <li class="group grid grid-rows-[auto_0fr] px-[40px] py-[10px] text-center transition-[grid-template-rows,padding] duration-500 ease-(--easing) data-active:grid-rows-[auto_1fr] data-active:py-[60px] md:py-0" :data-active="activeLink === 4" @mouseenter="handleHover(5)" @mouseleave="handleMouseLeave()">
+                    <button class="relative isolate w-full overflow-hidden md:cursor-default" @click="handleClick(5)">
+                      <h3 class="h4 uppercase transition-transform duration-500 ease-(--easing) group-data-active:-translate-y-full">Manufacturing & Agri</h3>
+                      <span aria-hidden="true" class="h4 absolute inset-0 translate-y-full uppercase transition-transform duration-500 ease-(--easing) group-data-active:translate-y-0">Manufacturing & Agri</span>
+                    </button>
+                    <div class="flex justify-center overflow-hidden"><p class="p2 max-w-[430px] pt-[4px]">End-to-end capital advisory for India's manufacturing backbone and agricultural commodity markets.</p></div>
+                  </li>
+                </ul>
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <!-- ══════════════════════════════════════════════════════
+             DARK SECTION — APPROACH + CLIENTS
+        ══════════════════════════════════════════════════════ -->
+        <div class="bg-rich-carbon -mt-[20px] overflow-hidden rounded-t-[20px]">
+          <div class="relative isolate overflow-hidden" id="investors-founders">
+            <!-- investorsFounders canvas -->
+            <div class="absolute inset-0 -z-1 size-full" x-data="investorsFounders">
+              <canvas x-ref="canvas" class="size-full"></canvas>
+            </div>
+
+            <!-- APPROACH -->
+            <section id="approach" class="py-[120px] md:py-[200px]">
+              <div class="container">
+                <div class="mx-auto grid max-w-[1440px] grid-cols-12 items-start gap-x-[24px] gap-y-[40px]">
+                  <!-- Left sticky -->
+                  <div class="col-span-12 flex flex-col items-start gap-[35px] md:col-span-5 xl:col-span-4"
+                    x-data="{ init() { const mm = gsap.matchMedia(); mm.add('(min-width: 768px)', () => { ScrollTrigger.create({ trigger: this.$el, start: 'top 80px', endTrigger: '#approach-steps', end: 'bottom 50%', pin: this.$el, pinSpacing: false, invalidateOnRefresh: true }); }); } }" data-lag="0.2">
+                    <div class="border-off-white/20 flex w-full flex-col gap-[15px] border-b pb-[15px]">
+                      <h2 class="p2-mono">Our Method</h2>
+                      <p class="h4 uppercase" x-data="splitTextReveal()">How we work. Refined over 27 years.</p>
+                    </div>
+                    <p class="p2-mono text-off-white/60">A disciplined methodology combining regulatory mastery, market intelligence, and relentless execution — from mandate to close.</p>
+                    <button class="group/button hover:animate-glitch-hover relative isolate" data-theme="light" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+                      <div class="flex h-[40px] items-center justify-center px-[20px]">
+                        <div class="group-data-[theme=light]/button:bg-neural-fog size-[10px] -translate-x-[24px] rounded-[3px] opacity-0 blur-[20px] transition-all duration-400 ease-(--easing) group-hover/button:-translate-x-[5px] group-hover/button:opacity-100 group-hover/button:blur-[0px]"></div>
+                        <div class="p2-mono group-data-[theme=light]/button:text-neural-fog relative isolate flex -translate-x-[5px] overflow-hidden transition-transform duration-400 ease-(--easing) group-hover/button:translate-x-[5px]">
+                          <span class="transition-transform duration-400 ease-(--easing) group-hover/button:-translate-y-full">Book a Consultation</span>
+                          <span class="absolute inset-0 translate-y-full transition-transform duration-400 ease-(--easing) group-hover/button:translate-y-0" aria-hidden="true">Book a Consultation</span>
+                        </div>
+                      </div>
+                      <svg class="size-[9px] corner-accent tl" viewBox="0 0 10 10" fill="none"><path d="M0.5 0.2L0.5 9.2M0.2 0.5L9.2 0.5" stroke="currentColor"/></svg>
+                      <svg class="size-[9px] corner-accent tr" viewBox="0 0 10 10" fill="none"><path d="M0.5 0.2L0.5 9.2M0.2 0.5L9.2 0.5" stroke="currentColor"/></svg>
+                      <svg class="size-[9px] corner-accent bl" viewBox="0 0 10 10" fill="none"><path d="M0.5 0.2L0.5 9.2M0.2 0.5L9.2 0.5" stroke="currentColor"/></svg>
+                      <svg class="size-[9px] corner-accent br" viewBox="0 0 10 10" fill="none"><path d="M0.5 0.2L0.5 9.2M0.2 0.5L9.2 0.5" stroke="currentColor"/></svg>
+                    </button>
+                  </div>
+
+                  <!-- Right stacked approach cards -->
+                  <div class="col-span-12 flex flex-col gap-[20px] md:col-span-6 md:col-start-7" id="approach-steps"
+                    x-data="{ init() {
+                      const mm = gsap.matchMedia();
+                      mm.add('(min-width: 768px) and (min-height: 666px)', () => {
+                        const cards = gsap.utils.toArray(this.$el.querySelectorAll('.card-item'));
+                        cards.forEach((card, index) => {
+                          const topOffset = 80 + (80 * (index * 0.25));
+                          ScrollTrigger.create({ trigger: card, start: 'top top+=' + topOffset, endTrigger: '#approach', end: 'bottom bottom', pin: true, pinSpacing: false, invalidateOnRefresh: true });
+                        });
+                      });
+                      mm.add('(max-width: 767px)', () => {
+                        const cards = gsap.utils.toArray(this.$el.querySelectorAll('.card-item'));
+                        cards.forEach(card => { gsap.from(card, { scrollTrigger: { trigger: card, start: 'top 50%', end: 'bottom bottom' }, clipPath: 'inset(0 0 100% 0)', duration: 0.6, ease: 'power3.inOut' }); });
+                      });
+                    } }">
+                    <div class="card-item bg-electric-teal text-rich-carbon">
+                      <div class="flex items-center justify-between gap-[32px]">
+                        <h3 class="h6 min-[830px]:h5 max-w-[360px] text-balance uppercase">Discovery & Diagnostics</h3>
+                      </div>
+                      <div class="flex flex-col gap-[30px]">
+                        <div class="border-rich-carbon/20 border-b pb-[9px]"><p class="p1-mono">01</p></div>
+                        <p class="p1">Deep-dive into business fundamentals, capital structure, and strategic objectives. We identify the optimal transaction architecture before any execution begins.</p>
+                      </div>
+                    </div>
+                    <div class="card-item bg-infrared text-rich-carbon">
+                      <div class="flex items-center justify-between gap-[32px]">
+                        <h3 class="h6 min-[830px]:h5 max-w-[360px] text-balance uppercase">Structuring & Strategy</h3>
+                      </div>
+                      <div class="flex flex-col gap-[30px]">
+                        <div class="border-rich-carbon/20 border-b pb-[9px]"><p class="p1-mono">02</p></div>
+                        <p class="p1">Bespoke transaction structuring — pricing, instrument design, regulatory pathway, timeline, and investor targeting. Every deal engineered for success.</p>
+                      </div>
+                    </div>
+                    <div class="card-item bg-off-white text-rich-carbon">
+                      <div class="flex items-center justify-between gap-[32px]">
+                        <h3 class="h6 min-[830px]:h5 max-w-[360px] text-balance uppercase">Execution & Closure</h3>
+                      </div>
+                      <div class="flex flex-col gap-[30px]">
+                        <div class="border-rich-carbon/20 border-b pb-[9px]"><p class="p1-mono">03</p></div>
+                        <p class="p1">SEBI filings, RBI approvals, investor relations — we manage every regulatory touchpoint. Zero errors, zero delays. Our compliance track record is spotless.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- CLIENTS / TESTIMONIAL -->
+            <section id="clients" class="pb-[200px] md:pt-[200px] md:pb-[300px]">
+              <div class="container">
+                <div class="mx-auto grid max-w-[1440px] grid-cols-12 items-start gap-x-[24px] gap-y-[40px]">
+                  <div class="order-2 col-span-12 flex flex-col gap-[20px] md:order-1 md:col-span-6"
+                    x-data="{ init() {
+                      const mm = gsap.matchMedia();
+                      mm.add('(min-width: 768px) and (min-height: 666px)', () => {
+                        const cards = gsap.utils.toArray(this.$el.querySelectorAll('.card-item'));
+                        cards.forEach((card, index) => {
+                          const topOffset = 80 + (80 * (index * 0.25));
+                          ScrollTrigger.create({ trigger: card, start: 'top top+=' + topOffset, endTrigger: '#clients', end: 'bottom bottom', pin: true, invalidateOnRefresh: true });
+                        });
+                      });
+                      mm.add('(max-width: 767px)', () => {
+                        const cards = gsap.utils.toArray(this.$el.querySelectorAll('.card-item'));
+                        cards.forEach(card => { gsap.from(card, { scrollTrigger: { trigger: card, start: 'top 50%', end: 'bottom bottom' }, clipPath: 'inset(0 0 100% 0)', duration: 0.6, ease: 'power3.inOut' }); });
+                      });
+                    } }">
+                    <div class="card-item bg-electric-teal text-rich-carbon">
+                      <div class="flex items-center justify-between gap-[32px]">
+                        <h3 class="h6 min-[830px]:h5 max-w-[450px] text-balance uppercase">Bikaji Foods International</h3>
+                      </div>
+                      <div class="flex flex-col gap-[30px]">
+                        <div class="border-rich-carbon/20 border-b pb-[9px]"><p class="p1-mono">IPO Advisory</p></div>
+                        <p class="p1">"Intensive Fiscal's expertise was pivotal to our IPO success — from regulatory filings to investor roadshows, their execution was absolutely flawless."</p>
+                        <p class="p2-mono opacity-60">— Shivratan Agarwal, Chairman</p>
+                      </div>
+                    </div>
+                    <div class="card-item bg-infrared text-rich-carbon">
+                      <div class="flex items-center justify-between gap-[32px]">
+                        <h3 class="h6 min-[830px]:h5 max-w-[450px] text-balance uppercase">300+ Corporate Groups</h3>
+                      </div>
+                      <div class="flex flex-col gap-[30px]">
+                        <div class="border-rich-carbon/20 border-b pb-[9px]"><p class="p1-mono">Track Record</p></div>
+                        <p class="p1">Across Real Estate, Healthcare, FMCG, IT, Agri, Jewellery, Manufacturing, and Financial Services — two decades of transactions across every major sector.</p>
+                      </div>
+                    </div>
+                    <div class="card-item bg-off-white text-rich-carbon">
+                      <div class="flex items-center justify-between gap-[32px]">
+                        <h3 class="h6 min-[830px]:h5 max-w-[450px] text-balance uppercase">Pan-India Presence</h3>
+                      </div>
+                      <div class="flex flex-col gap-[30px]">
+                        <div class="border-rich-carbon/20 border-b pb-[9px]"><p class="p1-mono">Network</p></div>
+                        <p class="p1">Relationships across 50+ cities, PE funds, family offices, HNIs, and institutional investors. We connect India's growth stories to the capital that will power them.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="order-1 col-span-12 flex flex-col items-start gap-[35px] md:order-2 md:col-span-5 md:col-start-8 xl:col-span-4 xl:col-start-9"
+                    x-data="{ init() { const mm = gsap.matchMedia(); mm.add('(min-width: 768px)', () => { ScrollTrigger.create({ trigger: this.$el, start: 'top 80px', endTrigger: '#clients', end: 'bottom 50%', pin: this.$el, pinSpacing: false, invalidateOnRefresh: true }); }); } }" data-lag="0.2">
+                    <div class="border-off-white/20 flex w-full flex-col gap-[15px] border-b pb-[15px]">
+                      <h2 class="p2-mono">Our Clients</h2>
+                      <p class="h4 uppercase" x-data="splitTextReveal()">India's most consequential businesses. Trust us.</p>
+                    </div>
+                    <p class="p2-mono text-off-white/60">From SMEs navigating their first IPO to large corporates restructuring billion-rupee capital stacks — we've been the partner behind India's defining transactions.</p>
+                    <button class="group/button hover:animate-glitch-hover relative isolate" data-theme="light" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+                      <div class="flex h-[40px] items-center justify-center px-[20px]">
+                        <div class="group-data-[theme=light]/button:bg-neural-fog size-[10px] -translate-x-[24px] rounded-[3px] opacity-0 blur-[20px] transition-all duration-400 ease-(--easing) group-hover/button:-translate-x-[5px] group-hover/button:opacity-100 group-hover/button:blur-[0px]"></div>
+                        <div class="p2-mono group-data-[theme=light]/button:text-neural-fog relative isolate flex -translate-x-[5px] overflow-hidden transition-transform duration-400 ease-(--easing) group-hover/button:translate-x-[5px]">
+                          <span class="transition-transform duration-400 ease-(--easing) group-hover/button:-translate-y-full">Work with us</span>
+                          <span class="absolute inset-0 translate-y-full transition-transform duration-400 ease-(--easing) group-hover/button:translate-y-0" aria-hidden="true">Work with us</span>
+                        </div>
+                      </div>
+                      <svg class="size-[9px] corner-accent tl" viewBox="0 0 10 10" fill="none"><path d="M0.5 0.2L0.5 9.2M0.2 0.5L9.2 0.5" stroke="currentColor"/></svg>
+                      <svg class="size-[9px] corner-accent tr" viewBox="0 0 10 10" fill="none"><path d="M0.5 0.2L0.5 9.2M0.2 0.5L9.2 0.5" stroke="currentColor"/></svg>
+                      <svg class="size-[9px] corner-accent bl" viewBox="0 0 10 10" fill="none"><path d="M0.5 0.2L0.5 9.2M0.2 0.5L9.2 0.5" stroke="currentColor"/></svg>
+                      <svg class="size-[9px] corner-accent br" viewBox="0 0 10 10" fill="none"><path d="M0.5 0.2L0.5 9.2M0.2 0.5L9.2 0.5" stroke="currentColor"/></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- ══════════════════════════════════════════════════════
+                 CONTACT / FOOTER
+            ══════════════════════════════════════════════════════ -->
+            <footer id="contact" x-data="footer">
+              <div class="container px-0!">
+                <div class="bg-rich-carbon relative grid lg:grid-cols-2">
+                  <canvas class="hidden size-full lg:block" x-ref="canvas"></canvas>
+                  <div class="bg-infrared text-rich-carbon grid w-full grid-cols-2 gap-[12px] gap-y-[60px] rounded-t-[20px] px-[10px] pt-[30px] pb-[10px] md:min-h-[666px] md:gap-[32px] md:gap-y-[210px] md:rounded-bl-[20px] md:pt-[40px] md:pb-[30px] lg:px-[24px] xl:px-[40px]">
+                    <div class="flex w-full flex-col items-start justify-start gap-[12px]">
+                      <h2 class="h6 uppercase">27 Years. 300+ Mandates.<br/>One standard: excellence.</h2>
+                      <p class="p2-mono mb-auto">Founders. Promoters. Institutional investors. Reach out — and let's structure something that moves.</p>
+                      <div class="flex flex-col gap-[8px] mt-[18px] md:mt-0">
+                        <div class="w-full max-w-[200px]">
+                          <a href="mailto:info@intensivefiscal.com" class="group/button hover:animate-glitch-hover relative isolate block" data-theme="dark">
+                            <div class="flex h-[40px] items-center justify-center px-[20px]">
+                              <div class="group-data-[theme=dark]/button:bg-rich-carbon size-[10px] -translate-x-[24px] rounded-[3px] opacity-0 blur-[20px] transition-all duration-400 ease-(--easing) group-hover/button:-translate-x-[5px] group-hover/button:opacity-100 group-hover/button:blur-[0px]"></div>
+                              <div class="p2-mono group-data-[theme=dark]/button:text-rich-carbon relative isolate flex -translate-x-[5px] overflow-hidden transition-transform duration-400 ease-(--easing) group-hover/button:translate-x-[5px]">
+                                <span class="transition-transform duration-400 ease-(--easing) group-hover/button:-translate-y-full">Email Us</span>
+                                <span class="absolute inset-0 translate-y-full transition-transform duration-400 ease-(--easing) group-hover/button:translate-y-0" aria-hidden="true">Email Us</span>
+                              </div>
+                            </div>
+                            <svg class="size-[9px] corner-accent tl" viewBox="0 0 10 10" fill="none"><path d="M0.5 0.2L0.5 9.2M0.2 0.5L9.2 0.5" stroke="currentColor"/></svg>
+                            <svg class="size-[9px] corner-accent tr" viewBox="0 0 10 10" fill="none"><path d="M0.5 0.2L0.5 9.2M0.2 0.5L9.2 0.5" stroke="currentColor"/></svg>
+                            <svg class="size-[9px] corner-accent bl" viewBox="0 0 10 10" fill="none"><path d="M0.5 0.2L0.5 9.2M0.2 0.5L9.2 0.5" stroke="currentColor"/></svg>
+                            <svg class="size-[9px] corner-accent br" viewBox="0 0 10 10" fill="none"><path d="M0.5 0.2L0.5 9.2M0.2 0.5L9.2 0.5" stroke="currentColor"/></svg>
+                          </a>
+                        </div>
+                        <p class="p3-mono opacity-60 text-[10px]">+91 22 2288 0088 · Nariman Point, Mumbai</p>
+                      </div>
+                    </div>
+                    <div class="ml-auto max-w-[90px] md:max-w-full flex items-start justify-end">
+                      <img src="logo.png" alt="Intensive Fiscal" style="max-height:80px; width:auto; opacity:0.3;" />
+                    </div>
+                    <nav class="order-1 col-span-2 flex flex-col gap-[32px] md:order-2 md:col-span-1 md:justify-end">
+                      <ul class="flex flex-col gap-[4px]">
+                        <li><a href="#services" class="group/button h5 relative isolate flex items-center gap-[8px] uppercase"><div class="bg-rich-carbon -mt-[3.5px] size-[25px] -translate-x-full rounded-[8px] opacity-0 blur-[32px] transition-[transform,translate,opacity,filter] duration-500 ease-(--easing) group-hover/button:translate-x-0 group-hover/button:opacity-100 group-hover/button:blur-[0px]"></div><div class="relative isolate flex -translate-x-[33px] overflow-hidden transition-transform duration-500 ease-(--easing) group-hover/button:translate-x-0"><span class="transition-transform duration-500 ease-(--easing) group-hover/button:-translate-y-full">Services</span><span class="absolute inset-0 translate-y-full transition-transform duration-500 ease-(--easing) group-hover/button:translate-y-0" aria-hidden="true">Services</span></div></a></li>
+                        <li><a href="#sectors" class="group/button h5 relative isolate flex items-center gap-[8px] uppercase"><div class="bg-rich-carbon -mt-[3.5px] size-[25px] -translate-x-full rounded-[8px] opacity-0 blur-[32px] transition-[transform,translate,opacity,filter] duration-500 ease-(--easing) group-hover/button:translate-x-0 group-hover/button:opacity-100 group-hover/button:blur-[0px]"></div><div class="relative isolate flex -translate-x-[33px] overflow-hidden transition-transform duration-500 ease-(--easing) group-hover/button:translate-x-0"><span class="transition-transform duration-500 ease-(--easing) group-hover/button:-translate-y-full">Sectors</span><span class="absolute inset-0 translate-y-full transition-transform duration-500 ease-(--easing) group-hover/button:translate-y-0" aria-hidden="true">Sectors</span></div></a></li>
+                        <li><a href="#approach" class="group/button h5 relative isolate flex items-center gap-[8px] uppercase"><div class="bg-rich-carbon -mt-[3.5px] size-[25px] -translate-x-full rounded-[8px] opacity-0 blur-[32px] transition-[transform,translate,opacity,filter] duration-500 ease-(--easing) group-hover/button:translate-x-0 group-hover/button:opacity-100 group-hover/button:blur-[0px]"></div><div class="relative isolate flex -translate-x-[33px] overflow-hidden transition-transform duration-500 ease-(--easing) group-hover/button:translate-x-0"><span class="transition-transform duration-500 ease-(--easing) group-hover/button:-translate-y-full">Approach</span><span class="absolute inset-0 translate-y-full transition-transform duration-500 ease-(--easing) group-hover/button:translate-y-0" aria-hidden="true">Approach</span></div></a></li>
+                        <li><a href="#clients" class="group/button h5 relative isolate flex items-center gap-[8px] uppercase"><div class="bg-rich-carbon -mt-[3.5px] size-[25px] -translate-x-full rounded-[8px] opacity-0 blur-[32px] transition-[transform,translate,opacity,filter] duration-500 ease-(--easing) group-hover/button:translate-x-0 group-hover/button:opacity-100 group-hover/button:blur-[0px]"></div><div class="relative isolate flex -translate-x-[33px] overflow-hidden transition-transform duration-500 ease-(--easing) group-hover/button:translate-x-0"><span class="transition-transform duration-500 ease-(--easing) group-hover/button:-translate-y-full">Clients</span><span class="absolute inset-0 translate-y-full transition-transform duration-500 ease-(--easing) group-hover/button:translate-y-0" aria-hidden="true">Clients</span></div></a></li>
+                      </ul>
+                      <div class="hidden md:block">
+                        <p class="p3-mono text-rich-carbon/60">SEBI Reg. INM000010860 · Copyright © 2026 Intensive Fiscal Services Pvt. Ltd.</p>
+                      </div>
+                    </nav>
+                  </div>
+                </div>
+              </div>
+            </footer>
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Alpine.js -->
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
+  <script>
+    // ─── LOADER ───────────────────────────────────────────────────
+    (function() {
+      const pct = document.getElementById('loader-pct');
+      const loader = document.getElementById('loader');
+      const duration = 1600;
+      const start = Date.now();
+      function ease(t) {
+        const p1x=0.62,p1y=0.16,p2x=0.13,p2y=1.01;
+        const cx=3*p1x,bx=3*(p2x-p1x)-cx,ax=1-cx-bx;
+        const cy=3*p1y,by=3*(p2y-p1y)-cy,ay=1-cy-by;
+        let x=t;
+        for(let i=0;i<4;i++){const cx2=((ax*x+bx)*x+cx)*x;const sl=(3*ax*x+2*bx)*x+cx;if(sl===0)break;x-=(cx2-t)/sl;}
+        return((ay*x+by)*x+cy)*x;
+      }
+      document.body.style.overflow='hidden';
+      function animate() {
+        const elapsed = Date.now()-start;
+        const tp = Math.min(elapsed/duration,1);
+        const p = Math.round(ease(tp)*100);
+        if(pct) pct.textContent = p+'%';
+        if(tp < 1) { requestAnimationFrame(animate); }
+        else {
+          document.body.style.overflow='';
+          loader.style.transition='opacity 0.6s ease';
+          loader.style.opacity='0';
+          setTimeout(()=>{ loader.style.display='none'; },700);
+        }
+      }
+      requestAnimationFrame(animate);
+    })();
+
+    // ─── CURSOR ───────────────────────────────────────────────────
+    const cursor = document.getElementById('wqf-cursor');
+    let mx=0,my=0,cx=0,cy=0;
+    document.addEventListener('mousemove',e=>{
+      mx=e.clientX; my=e.clientY;
+      cursor.style.opacity='1';
+    });
+    (function moveCursor(){
+      cx+=(mx-cx)*0.12; cy+=(my-cy)*0.12;
+      cursor.style.transform=`translate(${cx}px,${cy}px) translate(-50%,-50%)`;
+      requestAnimationFrame(moveCursor);
+    })();
+
+    // ─── HEADER SCROLL ────────────────────────────────────────────
+    const header = document.getElementById('site-header');
+    const headerBar = document.getElementById('header-bar');
+    const headerLogo = document.getElementById('header-logo');
+    const logoH = document.getElementById('logo-h');
+    const logoV = document.getElementById('logo-v');
+    let lastY=0, hidden=false, scrolled=false;
+    window.addEventListener('scroll',()=>{
+      const sy=window.scrollY;
+      const delta=sy-lastY;
+      scrolled=sy>window.innerHeight/4;
+      if(sy>window.innerHeight){
+        if(delta>50&&!hidden){hidden=true;header.style.transform='translateY(-120%)';}
+        else if(delta<-50&&hidden){hidden=false;header.style.transform='';}
+      } else { hidden=false; header.style.transform=''; }
+      if(Math.abs(delta)>50) lastY=sy;
+      if(scrolled){
+        headerLogo.style.width='120px';
+        logoV.style.transform='translateY(0)';
+        logoV.style.opacity='1';
+        logoH.style.opacity='0';
+        headerBar.style.background='rgba(17,17,17,0.95)';
+        headerBar.style.borderRadius='8px';
+        headerBar.style.padding='4px 12px';
+      } else {
+        headerLogo.style.width='220px';
+        logoV.style.transform='translateY(100%)';
+        logoV.style.opacity='0';
+        logoH.style.opacity='1';
+        headerBar.style.background='transparent';
+        headerBar.style.borderRadius='0';
+        headerBar.style.padding='0';
+      }
+    },{passive:true});
+
+    // ─── MOBILE MENU ─────────────────────────────────────────────
+    const mobMenu = document.getElementById('mob-menu');
+    const mobToggle = document.getElementById('mob-toggle');
+    let mobOpen=false;
+    mobToggle.addEventListener('click',()=>{
+      mobOpen=!mobOpen;
+      if(mobOpen){
+        mobMenu.style.display='flex';
+        requestAnimationFrame(()=>{ mobMenu.style.clipPath='inset(0 0 0% 0)'; });
+      } else { closeMob(); }
+    });
+    function closeMob(){
+      mobOpen=false;
+      mobMenu.style.clipPath='inset(0 0 100% 0)';
+      setTimeout(()=>{ mobMenu.style.display='none'; },400);
+    }
+    window.closeMob=closeMob;
+  </script>
+</body>
+</html>
